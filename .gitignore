@@ -1,0 +1,35 @@
+# ==================== NODE/NPM ====================
+node_modules/
+*.log
+
+# ==================== ENVIRONMENT ====================
+.env
+.env.local
+.env.*.local
+
+# ==================== OS/EDITOR ====================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+~$*
+
+# ==================== IDE ====================
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ==================== PROJECT DIRECTORIES ====================
+# Client und Server haben eigene .gitignore für ihre Builds
+# Hier nur allgemeine/projektübergreifende Regeln
+
+# ==================== PROJECT SPECIFIC ====================
+server/scripts/
+client/scripts/
+Docs/  
+Bilder/
