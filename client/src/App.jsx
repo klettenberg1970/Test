@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/navigation';
 
 import Start from './pages/Start/start';
+import Wetter from "./pages/Wetter/wetter";
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Start />} />
+         <Route path="/wetter" element={<Wetter />} />
  
 
       </Routes>

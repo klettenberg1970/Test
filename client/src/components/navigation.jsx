@@ -6,6 +6,7 @@ export default function Navigation() {
     return (
         <  div className="navigation">
             <Link to="/">Start</Link>
+            <Link to="/wetter">Wetter</Link>
            
         </div>
     )
