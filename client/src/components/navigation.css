@@ -1,0 +1,27 @@
+.navigation {
+    background-color: #f8f9fa;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+}
+
+.navigation a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.6rem;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    border-radius: 4px;
+}
+
+.navigation a:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+.navigation a:first-child {
+    margin-left: 0;
+}
