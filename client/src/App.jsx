@@ -3,6 +3,7 @@ import Navigation from './components/navigation';
 
 import Start from './pages/Start/start';
 import Wetter from "./pages/Wetter/wetter";
+import Umfragen from './pages/Umfragen/umfragen';
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
 
         <Route path="/" element={<Start />} />
          <Route path="/wetter" element={<Wetter />} />
+          <Route path="/umfragen" element={<Umfragen />} />
  
 
       </Routes>
