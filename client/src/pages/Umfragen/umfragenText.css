@@ -1,0 +1,14 @@
+
+.textcontainer {
+    margin: auto;
+    margin-top: 2rem;
+    background:white;
+    color:black;
+    width: 50%;
+    
+}
+
+.textcontainer h1,p{
+    padding: 0.2rem;;
+    text-align: center;
+}

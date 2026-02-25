@@ -1,5 +1,8 @@
 import { useState, useEffect, use } from 'react';
 
+import Umfragentext from './umfragenText';
+import Umfrageergebnisse from './umfrageergebniss';
+
 export default function Umfragen () {
     const [umfragen, setUmfragen] = useState({});
     
@@ -15,8 +18,13 @@ export default function Umfragen () {
         };
         fetchUmfragen();
     }, []);
-    console.log(umfragen);
+   
+
+
     return (<div>
+
+        <Umfragentext umfragen={umfragen} />
+        <Umfrageergebnisse ergebnisse={umfragen.ergebnisse} />
    <pre>{JSON.stringify(umfragen, null, 2)}</pre>
     
 </div>

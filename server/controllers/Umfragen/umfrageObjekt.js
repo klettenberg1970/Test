@@ -36,6 +36,6 @@ export const umfragen = async () => {
         };
     }
 
-    console.log(output);
+    // console.log(output);
     return output;
 };
