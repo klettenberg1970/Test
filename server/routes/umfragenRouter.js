@@ -3,7 +3,7 @@ import { getUmfragen } from '../controllers/Umfragen/umfragenController.js';
 
 const router = express.Router();
 
-router.get('/', getUmfragen);
+router.get('/:id', getUmfragen);
 
 
 export default router;

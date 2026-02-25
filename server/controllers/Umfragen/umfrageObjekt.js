@@ -1,8 +1,8 @@
 import { umfragedaten } from './getUmfragen.js';
 
-export const umfragen = async () => {
+export const umfragen = async (id) => {
     // Das zurückgegebene Objekt enthält survey und alleDaten
-    const { survey, alleDaten } = await umfragedaten();
+    const { survey, alleDaten } = await umfragedaten(id);
 
     const output = {
         veroeffentlichung: survey.Date,

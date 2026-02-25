@@ -1,8 +1,9 @@
 import {umfragen} from './umfrageObjekt.js'
 
 export const getUmfragen = async (req, res) => {
-    
-    const daten = await umfragen();
+    const id = req.params.id
+   
+    const daten = await umfragen(id);
     
     res.json(daten);
 };

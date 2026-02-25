@@ -4,10 +4,10 @@
 // const werte = ["Database", "Parliaments", "Institutes", "Taskers", "Methods", "Parties", "Surveys"];
 
 const api = 'https://api.dawum.de/';
-const wahlId = '0' // "0" ist die ID für den Bundestag
+// const wahlId = '15' // "0" ist die ID für den Bundestag
 
 
-export const umfragedaten = async () => {
+export const umfragedaten = async (wahlId) => {
     const response = await fetch(api);
     const data = await response.json();
 
