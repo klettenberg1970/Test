@@ -5,10 +5,11 @@
     background:white;
     color:black;
     width: 50%;
+    border: 3px solid black;
     
 }
 
-.textcontainer h1,p{
+.textcontainer p{
     padding: 0.2rem;;
     text-align: center;
 }

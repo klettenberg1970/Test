@@ -23,7 +23,7 @@ export default function Umfragen() {
         <UmfragenAuswahl onAuswahl={(handleAuswahl)} />
         <Umfragentext umfragen={umfragen} />
         <Umfrageergebnisse ergebnisse={umfragen.ergebnisse} />
-        <pre>{JSON.stringify(umfragen, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(umfragen, null, 2)}</pre> */}
 
     </div>
     )

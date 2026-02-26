@@ -4,7 +4,7 @@ export default function Umfragentext({umfragen})  {
 console.log(umfragen);
     return(
         <div className="textcontainer">
-        <h1> {umfragen.parlament?.name}</h1>
+        <p> {umfragen.parlament?.name}</p>
         <p> Veröffentlichung: {umfragen.veroeffentlichung}</p>
         <p> Zeitraum: {umfragen.zeitraum}</p>
         <p> Befragte: {umfragen.befragte}</p>
