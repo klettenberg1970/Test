@@ -1,11 +1,17 @@
 import { useState, useEffect, use } from 'react';
 
 import Umfragentext from './umfragenText';
-import Umfrageergebnisse from './umfrageergebniss';
+import Umfrageergebnisse from './umfrageergebnis';
 import UmfragenAuswahl from './umfragenAuswahl';
 
 export default function Umfragen() {
     const [umfragen, setUmfragen] = useState({});
+
+
+      // Bundestag (ID 0) beim ersten Laden automatisch abrufen
+    useEffect(() => {
+        handleAuswahl("Bundestag", 0);
+    }, []); // Leeres Array = nur beim ersten Render
 
     const handleAuswahl = async (wahl, id) => {
 
@@ -18,11 +24,13 @@ export default function Umfragen() {
         }
 
     }
-    return (<div>
+    return (
+    <div style={{width:"50%",margin:"auto"}}>
 
         <UmfragenAuswahl onAuswahl={(handleAuswahl)} />
+          <Umfrageergebnisse ergebnisse={umfragen.ergebnisse} />
         <Umfragentext umfragen={umfragen} />
-        <Umfrageergebnisse ergebnisse={umfragen.ergebnisse} />
+      
         {/* <pre>{JSON.stringify(umfragen, null, 2)}</pre> */}
 
     </div>

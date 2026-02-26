@@ -1,5 +1,6 @@
 
 import UmfrageTorte from "./umfragenTorte";
+import './umfrageergebnis.css';
 
 export default function Umfrageergebnisse({ ergebnisse }) {
     console.log(ergebnisse);
@@ -16,20 +17,18 @@ export default function Umfrageergebnisse({ ergebnisse }) {
 
 
     return (
-        <div style={{
-            width: '50%',
+        <div className="ergebnisse">
 
-            margin: '0 auto',
-            marginTop: '10px',
-           
-        }}>
-            <UmfrageTorte parteien={parteien} prozente={prozente} />
-            {sortierteErgebnisse.map((value) => (
+            <div className="ergebnistext">
+  {sortierteErgebnisse.map((value) => (
                 <div key={value.kurzform}>
                     <p>{value.kurzform}: {value.prozent}%</p>
                 </div>
             ))}
             
+            </div>
+          
+             <UmfrageTorte parteien={parteien} prozente={prozente} />
         </div>
     );
 }
