@@ -1,7 +1,7 @@
-import './umfragenText.css';
+import './CSS/umfragenText.css';
 
 export default function Umfragentext({umfragen})  {
-console.log(umfragen);
+
     return(
         <div className="textcontainer">
         <p> {umfragen.parlament?.name}</p>

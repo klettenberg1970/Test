@@ -12,6 +12,7 @@ const parteiFarben = {
     "Linke": "#BE3075",
     "AfD": "#009EE0",
     "BSW": "#7A4B9A",
+    "Freie Wähler": "#FF6600",
     "Sonstige": "#808080"
     // ... weitere
 };

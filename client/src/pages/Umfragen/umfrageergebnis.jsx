@@ -1,6 +1,6 @@
 
 import UmfrageTorte from "./umfragenTorte";
-import './umfrageergebnis.css';
+import './CSS/umfrageergebnis.css';
 
 export default function Umfrageergebnisse({ ergebnisse }) {
     console.log(ergebnisse);

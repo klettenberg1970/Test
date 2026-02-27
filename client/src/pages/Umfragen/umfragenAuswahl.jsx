@@ -1,4 +1,4 @@
-import './umfragenAuswahl.css';
+import './CSS/umfragenAuswahl.css';
 const wahlen = ["Bundestag","Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen", "Europaparlament"];
 
 

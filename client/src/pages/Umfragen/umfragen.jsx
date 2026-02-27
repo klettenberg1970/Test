@@ -25,7 +25,7 @@ export default function Umfragen() {
 
     }
     return (
-    <div style={{width:"50%",margin:"auto"}}>
+    <div style={{width:"60%",margin:"auto"}}>
 
         <UmfragenAuswahl onAuswahl={(handleAuswahl)} />
           <Umfrageergebnisse ergebnisse={umfragen.ergebnisse} />
