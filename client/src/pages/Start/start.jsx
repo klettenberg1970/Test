@@ -19,7 +19,11 @@ export default function Start() {
 
 
   return (
-    <div>
+     <div style={{ 
+      minHeight: 'calc(100vh - 120px)', /* Viewport-Höhe minus Navigation und Footer */
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <p>{nachricht.start}</p>
       <LocalStorage />  
     </div>

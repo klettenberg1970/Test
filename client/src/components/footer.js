@@ -5,20 +5,29 @@ class Footer extends HTMLElement {
 
         shadow.innerHTML = /*html*/`
             <style>
+                   
+                
                 #footer{
                     text-align:center;
-                    font-family:Arial, Helvetica, sans-serif;
-                    color:var(--color-white)
+                  
+                    
                 }
+                     #footer a {
+                   color:white;
+                    text-decoration: none;  /* Keine Unterstreichung */
+                    margin-left: 5px;
+                }         
+               
             
             </style>
+            <div id ='footercontainer'>
+                 <p id ='footer'> &copy;  2026 Stefan Basten  |  Köln-Klettenberg | 
+                    <span> <a href="http://google.com" target="_blank" rel="noopener noreferrer">Impressum</a></span> | 
+                </p>
+            </div>
            
-            <p id ='footer'> &copy;  2026 Stefan Basten  |  Köln-Klettenberg</p>
-        `;
+            `;
     }
-
-
-
 }
 
 customElements.define('webcomponent-footer', Footer);

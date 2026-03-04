@@ -15,7 +15,14 @@ export default function LocalStorage() {
   return (
     <div>
       <h2>Inhalt des localStorage:</h2>
-      <pre>{JSON.stringify(storageData, null, 2)}</pre>
+      <pre style={{ 
+        whiteSpace: 'pre-wrap',    /* Zeilenumbrüche erlauben */
+        wordWrap: 'break-word',     /* Lange Wörter umbrechen */
+        maxWidth: '100%',           /* Nicht überlaufen */
+        overflow: 'auto'            /* Scrollbars bei Bedarf */
+      }}>
+        {JSON.stringify(storageData, null, 2)}
+      </pre>
     </div>
   );
 }
