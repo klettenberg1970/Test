@@ -9,6 +9,7 @@ export default function Navigation() {
             <Link to="/wetter">Wetter</Link>
             <Link to="/umfragen">Umfragen</Link>
            
+           
         </div>
     )
 }

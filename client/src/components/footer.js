@@ -22,7 +22,9 @@ class Footer extends HTMLElement {
             </style>
             <div id ='footercontainer'>
                  <p id ='footer'> &copy;  2026 Stefan Basten  |  Köln-Klettenberg | 
-                    <span> <a href="http://google.com" target="_blank" rel="noopener noreferrer">Impressum</a></span> | 
+                    <span>
+                         <a href="/impressum"  rel="noopener noreferrer">Impressum</a>
+                        </span> | 
                 </p>
             </div>
            

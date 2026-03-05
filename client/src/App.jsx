@@ -6,6 +6,8 @@ import Start from './pages/Start/start';
 import Wetter from "./pages/Wetter/wetter";
 import Umfragen from './pages/Umfragen/umfragen';
 
+import Impressum from './data/Impressum/impressum.jsx';
+
 function App() {
 
 
@@ -19,7 +21,7 @@ function App() {
           <Route path="/" element={<Start />} />
           <Route path="/wetter" element={<Wetter />} />
           <Route path="/umfragen" element={<Umfragen />} />
-
+          <Route path="/impressum" element={<Impressum />} />
 
         </Routes>
         <webcomponent-footer></webcomponent-footer>
