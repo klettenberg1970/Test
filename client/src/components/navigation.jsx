@@ -8,6 +8,7 @@ export default function Navigation() {
             <Link to="/">Start</Link>
             <Link to="/wetter">Wetter</Link>
             <Link to="/umfragen">Umfragen</Link>
+            <Link to="/portfolio">Portfolio</Link>
            
            
         </div>

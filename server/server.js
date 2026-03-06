@@ -6,6 +6,7 @@ import logger from './middleware/logger.js'
 import startRouter from './routes/startRouter.js';
 import wetterRouter from './routes/wetterRouter.js';
 import umfragenRouter from './routes/umfragenRouter.js';
+import portfolioRouter from './routes/portfolioRouter.js';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/api/start', startRouter);
 app.use('/api/wetter', wetterRouter);
 app.use('/api/umfragen', umfragenRouter);
+app.use('/api/portfolio', portfolioRouter);
 
 
 

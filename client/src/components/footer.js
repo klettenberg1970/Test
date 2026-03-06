@@ -5,12 +5,10 @@ class Footer extends HTMLElement {
 
         shadow.innerHTML = /*html*/`
             <style>
-                   
-                
+                    
                 #footer{
                     text-align:center;
-                  
-                    
+                   
                 }
                      #footer a {
                    color:white;
@@ -18,8 +16,8 @@ class Footer extends HTMLElement {
                     margin-left: 5px;
                 }         
                
-            
             </style>
+            
             <div id ='footercontainer'>
                  <p id ='footer'> &copy;  2026 Stefan Basten  |  Köln-Klettenberg | 
                     <span>

@@ -5,6 +5,7 @@ import './components/footer.js';
 import Start from './pages/Start/start';
 import Wetter from "./pages/Wetter/wetter";
 import Umfragen from './pages/Umfragen/umfragen';
+import Portfolio from './pages/Portfolio/portfolio.jsx';
 
 import Impressum from './data/Impressum/impressum.jsx';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Start />} />
           <Route path="/wetter" element={<Wetter />} />
           <Route path="/umfragen" element={<Umfragen />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/impressum" element={<Impressum />} />
 
         </Routes>
