@@ -1,0 +1,24 @@
+@import url("CSS/nav.css");
+
+:root {
+  --primary-color: #0D652D;
+}
+
+body{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+     font-family:  sans-serif;
+    background-color: white;
+      color: black;
+    transition: background 0.3s ease; /* Macht den Übergang weich */
+}
+
+
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
