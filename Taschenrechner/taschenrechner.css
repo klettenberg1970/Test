@@ -1,0 +1,55 @@
+* {
+margin:0;
+padding:0;
+box-sizing: border-box;
+}
+
+body{
+
+    background-color: rgb(211, 202, 202);
+    font-family: Verdana,Arial,sans-serif;
+}
+nav{
+    display:flex;
+    justify-content: center;
+    margin-top: 6vh;
+}
+
+main{
+
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+    
+     
+}
+
+#display{
+
+    width:20%;
+    height:40px;
+    background-color: white;
+    color:black;
+    padding:5px;
+    border:3px solid black;
+    margin-bottom: 10px;
+   
+}
+
+.Tastenfeld {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 Spalten, gleichmäßig verteilt */
+  grid-auto-rows: minmax(60px, auto);    /* Feste Höhe für Buttons */
+  gap: 8px;                              /* Abstand zwischen Buttons */
+  width: 300px;                          /* Gesamtbreite des Grids */
+  margin: 0 auto;                        /* Zentrieren */
+}
+
+.Tastenfeld button {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+

@@ -1,0 +1,16 @@
+
+.links{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+    gap: 0.5rem;    
+}
+
+.links a{
+    text-decoration: none;
+        color: var(--primary-color);
+    font-size: 1.2rem;
+    transition: color 0.3s ease; /* Macht den Übergang weich */
+}   

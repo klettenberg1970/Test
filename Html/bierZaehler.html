@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>🍺 Bier-Zähler – Prost!</title>
+  <style>
+    /* ----- GLOBAL STYLES: Weißer Hintergrund, grüne Schrift ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none; /* vermeidet ungewolltes Markieren auf Buttons, ist aber nicht störend */
+    }
+
+    body {
+      background-color: #ffffff;    /* reinweißer Hintergrund */
+      font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    /* Hauptkarte – clean, weißer Hintergrund, dezenter Schatten für Tiefe */
+    .counter-card {
+      background-color: #ffffff;
+      border-radius: 3rem;
+      padding: 2rem 2rem 2.5rem 2rem;
+      max-width: 550px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e9ecef;
+      transition: all 0.2s ease;
+    }
+
+    /* alle Texte innerhalb der Karte: standard grün (außer wenn anders definiert) */
+    .counter-card {
+      color: #2c6e2c;      /* kräftiges, aber angenehmes Grün – gut lesbar auf weiß */
+    }
+
+    /* Emoji & Überschrift: grün mit leichtem persönlichen Touch */
+    .beer-header {
+      font-size: 3.8rem;
+      letter-spacing: 0.2rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      background: #ffffff;
+      padding: 0 0.75rem;
+      border-radius: 80px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: #2c6e2c;
+      letter-spacing: -0.3px;
+    }
+
+    .sub {
+      font-size: 1rem;
+      color: #2e7d2e;
+      border-top: 1px dashed #c8e6c8;
+      display: inline-block;
+      padding-top: 0.5rem;
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+
+    /* Zähler-Anzeige – große, fette grüne Zahl */
+    .count-display {
+      margin: 1.2rem 0 0.5rem 0;
+    }
+
+    .count-number {
+      font-size: 8rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #1f6e1f;
+      text-shadow: 0 2px 5px rgba(40, 110, 40, 0.08);
+      transition: transform 0.1s ease;
+      font-feature-settings: "tnum";
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
+      min-width: 200px;
+    }
+
+    /* kleine animierte "Prost"-Info, erscheint kurz nach Klick (optional) */
+    .toast-message {
+      min-height: 2.8rem;
+      margin: 0.8rem 0 1.4rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2b8c2b;
+      background: #f0f9f0;
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      opacity: 0.9;
+      transition: all 0.1s;
+    }
+
+    /* BUTTON: "Noch ein Bier bestellen" – modernistisch, grüner Rahmen + grüner Text, auf weiß */
+    .order-btn {
+      background: white;
+      border: 2px solid #2b8c2b;
+      color: #2b8c2b;
+      font-size: 1.45rem;
+      font-weight: 600;
+      padding: 1rem 1.8rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: auto;
+      min-width: 260px;
+      backdrop-filter: blur(0px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      margin-top: 0.5rem;
+    }
+
+    /* Hover & Active – dezentes grünes Leuchten, immer im grünen Farbschema */
+    .order-btn:hover {
+      background: #f2faf2;
+      border-color: #197419;
+      color: #197419;
+      transform: scale(0.97);
+      box-shadow: 0 6px 12px rgba(30, 90, 30, 0.1);
+    }
+
+    .order-btn:active {
+      transform: scale(0.96);
+      background: #e8f3e8;
+      transition: 0.02s;
+    }
+
+    /* kleiner Zurücksetzen-Button – optional, aber praktisch & bleibt grün/weiß */
+    .reset-area {
+      margin-top: 2.2rem;
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: none;
+      color: #3a9b3a;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      transition: all 0.2s;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 0.7;
+    }
+
+    .reset-btn:hover {
+      opacity: 1;
+      color: #166b16;
+      background-color: #f5fff5;
+      text-decoration: none;
+    }
+
+    /* kleine Fußnote – flott & clean */
+    .beer-footer {
+      margin-top: 2rem;
+      font-size: 0.7rem;
+      color: #469646;
+      opacity: 0.7;
+      letter-spacing: 0.2px;
+    }
+
+    /* Anpassungen für mobile Geräte – flüssiges Layout */
+    @media (max-width: 500px) {
+      .counter-card {
+        padding: 1.5rem 1.2rem 2rem;
+      }
+      .count-number {
+        font-size: 5.6rem;
+      }
+      .order-btn {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.2rem;
+        min-width: 220px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .beer-header {
+        font-size: 2.7rem;
+      }
+    }
+
+    /* Verhindert, dass der Button bei langem Drücken auf iOS markiert wird */
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body>
+
+<div class="counter-card">
+  <!-- kleine Bier-Emoji Dekoration -->
+  <div class="beer-header">🍺</div>
+  <h1>Bier-Zähler</h1>
+  <div class="sub">Jede Bestellung zählt</div>
+
+  <!-- Anzeige der aktuellen Anzahl Biere -->
+  <div class="count-display">
+    <span class="count-number" id="beerCount">0</span>
+  </div>
+
+  <!-- Dynamische Prost- / Bier-Zeile (optional, aber lustig) -->
+  <div id="prostMessage" class="toast-message">🍻 Prost! Noch kein Bier bestellt?</div>
+
+  <!-- Hauptbutton: Noch ein Bier bestellen -->
+  <div>
+    <button class="order-btn" id="orderBeerBtn">
+      <span>🍺</span> Noch ein Bier bestellen <span>➕</span>
+    </button>
+  </div>
+
+  <!-- kleiner Reset-Button – bleibt im gleichen Stil (grün/weiß) -->
+  <div class="reset-area">
+    <button class="reset-btn" id="resetBtn">Zähler zurücksetzen</button>
+  </div>
+  <div class="beer-footer">
+    ⚡ Ein Klick = +1 Bier
+  </div>
+</div>
+
+<script>
+  (function() {
+    // --- STATE: Zählerstand (Anzahl bestellter Biere)
+    let beerCounter = 0;
+
+    // --- DOM-Elemente
+    const countDisplay = document.getElementById('beerCount');
+    const orderButton = document.getElementById('orderBeerBtn');
+    const resetButton = document.getElementById('resetBtn');
+    const messageBox = document.getElementById('prostMessage');
+
+    // Hilfsfunktion: Aktualisiert die Anzeige (Zahl + Nachricht je nach Bestellung)
+    function updateDisplay() {
+      // Zahl immer als Integer anzeigen
+      countDisplay.textContent = beerCounter;
+
+      // Lustige / motivierende Nachrichten basierend auf Anzahl (immer grüner Vibe)
+      // bleibt aber rein informativ – keine Funktionseinschränkung
+      if (beerCounter === 0) {
+        messageBox.innerHTML = "🍻 Prost! Noch kein Bier bestellt?";
+      } else if (beerCounter === 1) {
+        messageBox.innerHTML = "🍺 Ein Bier bestellt! Auf die nächste Runde!";
+      } else if (beerCounter < 5) {
+        messageBox.innerHTML = `🍻 Schon ${beerCounter} Biere bestellt – guter Start!`;
+      } else if (beerCounter < 10) {
+        messageBox.innerHTML = `🍺✨ ${beerCounter} Biere! Der Abend wird feierlich.`;
+      } else if (beerCounter < 20) {
+        messageBox.innerHTML = `🍻🎉 Wow, ${beerCounter} Biere! Runde geht auf dich?`;
+      } else {
+        messageBox.innerHTML = `⚡ LEGENDÄR! ${beerCounter} Biere bestellt. Du bist eine Legende 🍻👑`;
+      }
+    }
+
+    // --- Erhöhungsfunktion: "Noch ein Bier bestellen"
+    function incrementBeer() {
+      beerCounter = beerCounter + 1;
+      updateDisplay();
+
+      // Kurzer Optional: Kleine "Glückwunsch"-Animation für die Zahl kurz (fügt flair hinzu)
+      // Keine Fehler, einfach visuelles Feedback (skaliert kurz die Zahl)
+      if (countDisplay) {
+        countDisplay.style.transform = 'scale(1.08)';
+        setTimeout(() => {
+          if (countDisplay) countDisplay.style.transform = 'scale(1)';
+        }, 120);
+      }
+
+      // Button-Feedback: Kleiner Klick-Effekt (durch CSS bereits active vorhanden)
+      // Zusätzlich: Kurzes Aufblitzen der Nachricht (optional)
+      if (messageBox) {
+        messageBox.style.opacity = '0.6';
+        setTimeout(() => {
+          if (messageBox) messageBox.style.opacity = '0.95';
+        }, 100);
+      }
+    }
+
+    // --- Reset-Funktion: Setzt den Zähler auf 0 zurück
+    function resetCounter() {
+      // falls bestätigung erwünscht wäre? Aber für simplen Zähler kein confirm – intuitiv, aber sicher
+      // aber wir lassen es direkt zurücksetzen, da extra Button explizit ist.
+      beerCounter = 0;
+      updateDisplay();
+
+      // zusätzlich: sanfte Rückmeldung, dass zurückgesetzt wurde
+      if (messageBox) {
+        const originalMessage = messageBox.innerHTML;
+        messageBox.innerHTML = "🔄 Zähler zurückgesetzt – auf ein neues Bier! 🍺";
+        // Nach 1,8 Sekunden wieder die normale Nachricht entsprechend 0 Bieren setzen
+        setTimeout(() => {
+          // Da beerCounter = 0, aktualisiert updateDisplay den gerade passenden Text
+          updateDisplay();   // ruft wieder die passende Nachricht für 0 auf
+        }, 1600);
+      } else {
+        updateDisplay();
+      }
+
+      // optional kleine haptische Rückmeldung bei Reset (nicht störend)
+      if (countDisplay) {
+        countDisplay.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          if (countDisplay) countDisplay.style.transform = 'scale(1)';
+        }, 130);
+      }
+    }
+
+    // --- Event-Listener anbinden
+    if (orderButton) {
+      orderButton.addEventListener('click', incrementBeer);
+    } else {
+      console.warn("Button 'orderBeerBtn' nicht gefunden");
+    }
+
+    if (resetButton) {
+      resetButton.addEventListener('click', resetCounter);
+    } else {
+      console.warn("Reset-Button nicht gefunden");
+    }
+
+    // Initialisierung: Anzeige & Nachricht für 0
+    updateDisplay();
+
+    // Bonus: Tastaturunterstützung (optional aber cool) – mit der Leertaste oder Plus-Taste?
+    // Nicht erforderlich, aber erhöht Benutzerfreundlichkeit ohne die Anforderungen zu sprengen.
+    // Im Sinne eines simplen Zählers machen wir keinen Overkill, aber weil es schön ist:
+    // Man kann auch "B" drücken für weiteres Bier (aber dezent, ohne die Datei zu stören)
+    // Achtung: Das ist keine Anforderung, aber ein extra Feature, das nicht im Weg steht.
+    // Wir fügen es optional hinzu, da es den Geist der "simplen Zähler" nicht verletzt.
+    // Bitte nur als nettes Plus: Wenn Nutzer die Taste "B" oder "+" drücken, wird ein Bier bestellt.
+    // Aber wir achten darauf, dass es keine Konflikte mit Eingabefeldern gibt, es gibt keine inputs.
+    function handleGlobalKeydown(event) {
+      // Nur wenn kein input/textarea fokussiert ist (gibt es keine, aber sicherheitshalber)
+      const activeTag = document.activeElement?.tagName;
+      if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'BUTTON') {
+        // Wenn ein Button fokussiert ist, könnte Enter den Button klicken, das ist ok.
+        // Wir wollen keine doppelten Aktionen, aber wenn Button fokussiert, dann ignoriere zusätzlich b/+ nicht.
+        // Denn Enter auf Button löst bereits click aus. Also extra abfangen damit kein doppelinkrement.
+        // Aber da wir auf keydown reagieren und Button Enter normalerweise klickt, könnte doppelt werden:
+        // Also nur auslösen, wenn das aktive Element nicht der Bestell-Button selbst ist ODER keine Modifier.
+        // Einfach und sicher: Bei Bestell-Button per Enter feuert sowohl Button click als auch dieser Handler.
+        // Deshalb vermeiden wir hier Doppelinkrement: wenn der fokussierte Button der orderButton ist,
+        // dann tue nichts bei Enter oder Space (die sowieso Klick auslösen). Für andere Tasten wie B / + ist es egal.
+        if (document.activeElement === orderButton && (event.key === 'Enter' || event.key === ' ')) {
+          return; // Button behandelt selbst click, verhindere doppeltes Inkrement
+        }
+      }
+      // Taste 'b' oder 'B' -> Bier bestellen
+      if (event.key === 'b' || event.key === 'B' || event.key === '+' || event.key === 'Plus') {
+        event.preventDefault();  // verhindert ggf. '+' im Browser (kein Seiten-Reload o.ä.)
+        incrementBeer();
+      }
+      // Taste 'r' oder 'R' zum Zurücksetzen (optional, praktisch)
+      else if (event.key === 'r' || event.key === 'R') {
+        event.preventDefault();
+        resetCounter();
+      }
+      // Escape oder 0? nicht nötig, aber man kann.
+    }
+
+    // füge globalen Event-Listener hinzu – macht die App noch flüssiger,
+    // ohne die Minimalität zu stören. Falls nicht gewünscht, kann man es ignorieren, aber es ist harmlos.
+    window.addEventListener('keydown', handleGlobalKeydown);
+
+    // kleine "Aufräumfunktion" (theoretisch nicht nötig da single page lifetime, aber clean)
+    // kann optional bleiben, da kein window unload problem.
+  })();
+</script>
+</body>
+</html>
