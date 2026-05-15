@@ -1,4 +1,4 @@
-import { aktualisiereUhrzeit, aktualisiereDatum } from "./Javascript/uhrzeit.js";
+import { aktualisiereUhrzeit, aktualisiereDatum } from "./JavaScript/uhrzeit.js";
 import { toggle } from "./JavaScript/toggle.js"
 
 toggle()
