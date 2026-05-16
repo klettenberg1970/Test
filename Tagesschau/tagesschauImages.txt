@@ -1,0 +1,36 @@
+Hier ist der zusammenhängende Text – einfach kopieren und speichern:
+
+---
+
+**Tagesschau API – Bildgrößen (imageVariants)**
+
+Die API liefert Bilder in verschiedenen Größen. Je nach Schlüssel erhält man quadratische (1x1) oder querformatige (16x9) Bilder.
+
+**Quadratische Bilder (1:1) – Schlüssel:**
+- 1x1-144 → 144×144 Pixel
+- 1x1-256 → 256×256 Pixel
+- 1x1-432 → 432×432 Pixel
+- 1x1-640 → 640×640 Pixel
+- 1x1-840 → 840×840 Pixel
+
+**Querformatige Bilder (16:9) – Schlüssel:**
+- 16x9-256 → 256 Pixel Breite
+- 16x9-384 → 384 Pixel Breite
+- 16x9-512 → 512 Pixel Breite
+- 16x9-640 → 640 Pixel Breite
+- 16x9-960 → 960 Pixel Breite
+- 16x9-1280 → 1280 Pixel Breite
+- 16x9-1920 → 1920 Pixel Breite
+
+**Zugriff im Code:**
+```javascript
+// Beispiel für 16:9 mit 960px Breite
+const bildUrl = item.teaserImage.imageVariants["16x9-960"];
+```
+
+Wichtig: Wegen des Bindestrichs im Schlüssel müssen eckige Klammern verwendet werden. Die Punkt-Schreibweise funktioniert nicht.
+
+**Empfehlung fürs Handy (Galaxy A52):** 16x9-960
+**Empfehlung für Desktop:** 16x9-1280 oder 16x9-1920
+
+---
