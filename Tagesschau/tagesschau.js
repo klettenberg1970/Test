@@ -1,62 +1,90 @@
 
+import {formatiereDatumMitUhrzeit} from "./datum.js";
 
-const ressorts = ["Inland", "Ausland", "Wirtschaft", "Sport", "Investigativ", "Wissen"]
-
-
-const news = document.querySelector(".news")
+const ressorts = ["Inland", "Ausland", "Wirtschaft", "Sport", "Investigativ", "Wissen"];
+const news = document.querySelector(".news");
+const selectContainer = document.querySelector(".select-container");
 
 export async function getNews(ressort) {
     const url = `https://www.tagesschau.de/api2u/news/?regions=1&ressort=${ressort}`;
-
     const response = await fetch(url);
     const daten = await response.json();
-
-    return daten.news
+    return daten.news;
 }
 
-const main = async () => {
-    const nachrichten = await getNews("Inland");
+async function zeigeNachrichten(ressort) {
+    news.innerHTML = "";
+    
+    const nachrichten = await getNews(ressort);
+    
     for (const item of nachrichten) {
-        // Titel (h3)
-        const titel = document.createElement('h3');
-        titel.innerText = item.title;
-        news.appendChild(titel);
-        
-        // Erster Satz (p)
-        const ersterSatz = document.createElement('p');
-        ersterSatz.innerText = item.firstSentence;
-        news.appendChild(ersterSatz);
-        
-        // Link (a)
-        const link = document.createElement('a');
-        link.innerText = "Zum Artikel";
-        link.href = item.detailsweb;
-        link.target = "_blank"; // öffnet in neuem Tab
-        news.appendChild(link);
-        
-        // Datum (p)
+        // CARD-CONTAINER - Das ist das Wichtige!
+        const card = document.createElement('div');
+        card.className = 'news-card'; // Klasse für CSS
+
         const datum = document.createElement('p');
-        datum.innerText = item.date;
-        news.appendChild(datum);
+        datum.innerText = formatiereDatumMitUhrzeit(item?.date);
+        card.appendChild(datum);
         
-        // Bild (img)
+        // Alle Inhalte in die card einfügen (nicht direkt in news)
+        const titel = document.createElement('h3');
+        titel.innerText = item?.title || "";
+        card.appendChild(titel);
+
+        const ersterSatz = document.createElement('p');
+        ersterSatz.innerText = item?.firstSentence || "";
+        card.appendChild(ersterSatz);
+
+       
+
         const bild = document.createElement('img');
-        bild.src = item.teaserImage.imageVariants["16x9-960"];
-        bild.alt = item.title; // Barrierefreiheit
-        news.appendChild(bild);
+        bild.src = item?.teaserImage?.imageVariants?.["16x9-256"] || "";
+        bild.alt = item?.title || "";
+        card.appendChild(bild);
+
+         const link = document.createElement('a');
+        link.innerText = item?.detailsweb ? "Zum Artikel" : "";
+        link.href = item?.detailsweb || "";
+        link.target = "_blank";
+        card.appendChild(link);
+
+
+
+        // Card in den News-Container einfügen
+        news.appendChild(card);
         
-        // Optional: Trenner zwischen den News
-        const trenner = document.createElement('hr');
-        news.appendChild(trenner);
         
-        // Console logs (zum Debuggen)
-        console.log(item);
-        console.log(item.firstSentence);
-        console.log(item.detailsweb);
-        console.log(item.date);
-        console.log(item.teaserImage.imageVariants["16x9-960"]);
     }
 }
 
+const auswahl = () => {
+    const select = document.createElement("select");
 
-main()
+    // Platzhalter-Option als ersten Eintrag
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.innerText = "--- Bitte wählen ---";
+    placeholderOption.disabled = true; // Nicht auswählbar
+    placeholderOption.selected = true; // Standardmäßig ausgewählt
+    select.appendChild(placeholderOption);
+
+    // Die eigentlichen Ressorts
+    for (const option of ressorts) {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.innerText = option;
+        select.appendChild(optionElement);
+    }
+    selectContainer.appendChild(select);
+
+    // Event-Listener: Wenn Auswahl ändert, zeige neue Nachrichten
+    select.addEventListener("change", async (event) => {
+        const selectedRessort = event.target.value;
+        if (selectedRessort) { // Nur laden, wenn kein Platzhalter
+            await zeigeNachrichten(selectedRessort);
+        }
+    });
+}
+
+// Starte die App
+auswahl();
