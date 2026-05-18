@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="zufallszahlen.css">
+  <title>Test</title>
+</head>
+
+<body>
+
+  <div class="eingabe">
+    <h3>Einstellungen</h3>
+
+    <form id="formular">
+
+      <label>
+        Anzahl
+        <input type="number"  name="anzahl">
+      </label>
+      
+      <hr>
+      
+      <label>
+        Startwert
+        <input type="number"  name="startzahl">
+      </label>
+      
+      <hr>
+      
+      <label>
+        Endwert
+        <input type="number"  name="endzahl">
+      </label>
+      
+      <hr>
+
+     <fieldset>
+    <label class="radio-label">
+        einmalig
+        <input type="radio" name="haeufigkeit" value="einmalig" checked>
+    </label>
+    
+    <label class="radio-label">
+        mehrfach
+        <input type="radio" name="haeufigkeit" value="mehrfach">
+    </label>
+</fieldset>
+
+      <button type="submit">bestätigen</button>
+
+    </form>
+
+  </div>
+<hr>
+  <div class="ausgabe">
+    <h3 class="ueberschrift"></h3>
+    <p class="zahlen"></p>
+
+  </div>
+
+  <script src="zufallszahlen.js"></script>
+</body>
+
+</html>
