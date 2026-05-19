@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="De">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zufallsfarben</title>
+</head>
+
+<body style="background-color: white">
+    <div id="container"
+        style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 20px;">
+        <div id="anzeigefeld"
+            style="width: 300px; height: 300px; border: 2px solid black; background-color: lightgray;"></div>
+        <button id="zufall">Bitte klicken</button>
+        <p id="rgbWert">RGB: rgb(211, 211, 211)</p>
+        <p id="hexWert">HEX: #D3D3D3</p>
+    </div>
+    <script>
+        const anzeige = document.querySelector('#anzeigefeld')
+        const btn = document.querySelector('#zufall')
+        const rgbWertElement = document.querySelector('#rgbWert')
+        const hexWertElement = document.querySelector('#hexWert')
+
+        // Funktion um eine Dezimalzahl in Hexadezimal umzuwandeln (mit führender 0)
+        function toHex(dezimal) {
+            const hex = dezimal.toString(16).toUpperCase()
+            return hex.length === 1 ? '0' + hex : hex
+        }
+
+        // Funktion um RGB in HEX zu konvertieren
+        function rgbToHex(r, g, b) {
+            return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+        }
+
+        btn.addEventListener('click', () => {
+            const werte = []
+            
+            // Drei Werte generieren
+            for (let i = 0; i < 3; i++) {
+                werte.push(Math.floor(Math.random() * 256))
+            }
+            
+            // RGB-String erstellen
+            const zufallsFarbe = `rgb(${werte[0]}, ${werte[1]}, ${werte[2]})`
+            console.log(zufallsFarbe)
+            
+            // HEX-Wert erstellen
+            const hexFarbe = rgbToHex(werte[0], werte[1], werte[2])
+            
+            // Farbe anwenden
+            anzeige.style.backgroundColor = zufallsFarbe
+            
+            // Werte in den p-Tags anzeigen
+            rgbWertElement.textContent = `RGB: ${zufallsFarbe}`
+            hexWertElement.textContent = `HEX: ${hexFarbe}`
+        })
+
+        // Initiale Werte für die Startfarbe (lightgray) setzen
+        rgbWertElement.textContent = `RGB: rgb(211, 211, 211)`
+        hexWertElement.textContent = `HEX: #D3D3D3`
+    </script>
+</body>
+</html>
