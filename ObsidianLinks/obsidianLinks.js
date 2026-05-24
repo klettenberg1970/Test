@@ -11,7 +11,7 @@ const getLinks = async () => {
 marked.use({
   renderer: {
     link({href, title, text}) {
-      return `<a href="${href}" target="_blank" rel="noreferrer"> ${text}</a>`;
+      return `<a href="${href}" target="_blank" rel="noreferrer"> ${text}</a> `;
     }
   }
 });

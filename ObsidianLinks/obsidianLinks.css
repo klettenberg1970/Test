@@ -20,14 +20,28 @@ body{
     align-items: center;
 }
 
+nav {
+  margin:1rem;
+}
 
+.links-container{
+
+  background-color: white;
+  width: 80%;
+  margin:1rem;
+
+}
 .links-container h2 {
   color: #333;
+  margin-top:1rem;
+  border-top: 1px solid black;
+  padding:1rem;
 }
 
 .links-container a {
-  color: white;
+  color: var(--primary-color);
   text-decoration: none;
+  padding:1rem;
 }
 
 .links-container a:hover {
