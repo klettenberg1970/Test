@@ -3,7 +3,7 @@ const API = 'https://backend-dashboard-1slu.onrender.com'
 const linkContainer = document.querySelector(".links-container")
 
 const getLinks = async () => {
-    const response = await fetch(`${API}/api/projekte/datei/${linksId}`);
+    const response = await fetch(`${API}/api/obsidian/datei/${linksId}`);
     const daten = await response.json();
     return daten
 }
