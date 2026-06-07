@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="uebersetzen.css">
+  <title>Test</title>
+</head>
+
+<body>
+  <nav>
+    <h1>Übersetzung (Deutsch => Englisch) </h1>
+  </nav>
+
+  <div class="auswahl"></div>
+
+
+
+
+
+  <div class="eingabe">
+
+    <form id="formular">
+      <label for="story">Eingabe</label>
+      <textarea id="story" name="eingabeText" rows="15" cols="20"></textarea>
+
+      <button type="submit">Übersetzen</button>
+    </form>
+
+  </div>
+
+  <div class="ausgabe">
+   <label for="output">Ausgabe</label>
+      <textarea id="output" name="eingabeText" rows="15" cols="20"></textarea>
+      <button id="resetButton">Neu</button>
+  </div>
+
+
+
+  <script type="module" src="uebersetzen.js"></script>
+</body>
+
+</html>
