@@ -31,19 +31,14 @@ nav {
   margin:1rem;
 
 }
-.links-container h2 {
-  color: #333;
-  margin-top:1rem;
-  border-top: 1px solid black;
-  padding:1rem;
+
+.links-card {
+  background-color:  var(--primary-color); 
+  margin:1rem;
 }
 
-.links-container a {
-  color: var(--primary-color);
-  text-decoration: none;
-  padding:1rem;
+.links-card a {
+  color: white;
+  text-decoration: none;  /* Entfernt den Unterstrich im Normalzustand */
 }
 
-.links-container a:hover {
-  text-decoration: underline;
-}
