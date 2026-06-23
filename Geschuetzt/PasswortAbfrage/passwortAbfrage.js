@@ -41,7 +41,7 @@ localStorage.setItem('token', data.token);
     if (errorCounter >= 3) {
       inputFeld.disabled = true;
       meldung.style.color = 'red';
-      meldung.textContent = '🔒 Zu viele Fehlversuche! Versuchen Sie es in 30 Sekunden erneut.';
+      meldung.textContent = '🔒 Zu viele Fehlversuche!  30 Sekunden warten !';
 
       let countdown = 30;
       lockTimeout = setInterval(() => {
@@ -53,7 +53,7 @@ localStorage.setItem('token', data.token);
           errorCounter = 0;
           inputFeld.disabled = false;
 
-          meldung.textContent = '🔓 Zugang freigegeben! Sie können es erneut versuchen.';
+          meldung.textContent = '🔓 Zugang freigegeben! ';
           inputFeld.focus();
         }
       }, 1000);
