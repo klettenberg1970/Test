@@ -1,7 +1,6 @@
 const input = document.querySelector('#formular');
 
-// Korrekte API-URL: erst Cloud, wenn nicht erreichbar dann lokal
-const API = window.location.hostname === 'localhost' 
+const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://localhost:8080' 
   : 'https://nodeserver-995188789852.europe-west3.run.app';
 
