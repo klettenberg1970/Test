@@ -1,69 +1,109 @@
-const ordnerContainer = document.querySelector('.ordner-container')
-const obsidianID = '1yDIjIArVucBW_f_MRiVu3C1aEUq71_Sr'
+const ordnerContainer = document.querySelector('.ordner-container');
+const mdDiv = document.querySelector('.mdDatei');
+const unterordnerDiv = document.querySelector('.unterordner');
+const mdContentDiv = document.querySelector('#mdContent');
+
+const obsidianID = '1yDIjIArVucBW_f_MRiVu3C1aEUq71_Sr';
 
 const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     ? 'http://localhost:8080'
     : 'https://nodeserver-995188789852.europe-west3.run.app';
 
-    console.log(API)
 
-const getOrdner = async (id) => {
-    const response = await fetch(`${API}/api/obsidian/ordner/${id}`);
+
+const getalleDateien = async (id) => {
+    const response = await fetch(`${API}/api/obsidian/komplett/${id}`);
     const data = await response.json();
-    return data
-}
+    return data;
+};
 
 const getDateien = async (id) => {
     const response = await fetch(`${API}/api/obsidian/dateien/${id}`);
     const data = await response.json();
-
-    return data
-}
-
-
-const createButtons = async (folderData) => {
-    const ordnerListe = folderData.ordner || [folderData];
-    
-    for (const ordner of ordnerListe) {
-        if (ordner.name !== ".obsidian") {
-            const ordnerButton = document.createElement("button");
-            ordnerButton.textContent = ordner.name;
-            ordnerContainer.appendChild(ordnerButton);
-
-            ordnerButton.addEventListener('click', async () => {
-                console.log(`Name: ${ordner.name}`);
-                console.log(`ID: ${ordner.id}`);
-                
-                // Hole ALLE Inhalte (Dateien UND Ordner)
-                const dateien = await getDateien(ordner.id);
-                console.log('Alle Inhalte:', dateien);
-                
-                for (const datei of dateien.mdDateien) {
-                    if (datei.mimeType === 'application/vnd.google-apps.folder') {
-                        // Es ist ein Unterordner - hol die Unterordner-Struktur
-                        console.log(`Unterordner gefunden: ${datei.name}`);
-                        const unterOrdner = await getOrdner(datei.id);
-                        console.log('Unterordner-Struktur:', unterOrdner);
-                        
-                        // Rekursiv die Unterordner durchgehen
-                        await createButtons(unterOrdner);
-                    } else {
-                        // Es ist eine Datei (z.B. Markdown)
-                        console.log(`Datei gefunden: ${datei.name} (${datei.mimeType})`);
-                        // Hier könntest du einen Button für die Datei erstellen
-                    }
-                }
-            });
-        }
-    }
+    return data;
 };
 
+const getDateibyId = async (id) => {
+    const response = await fetch(`${API}/api/obsidian/datei/${id}`);
+    const data = await response.json();
 
-
-const main = async ()=> {
-    const obsidianFolder = await getOrdner(obsidianID);
-    console.log(obsidianFolder.ordner)
-    createButtons(obsidianFolder)
+    return data;
 }
 
-main();
+
+const unterordner = async (datei) => {
+    console.log('Unterordner:', datei);
+    const unterordnerButton = document.createElement("button");
+    unterordnerButton.textContent = ` ${datei.name}`;
+    unterordnerDiv.appendChild(unterordnerButton)
+
+    unterordnerButton.addEventListener('click', async () => {
+
+        const alleDateien = await getDateien(datei.id)
+        for (const md of alleDateien.mdDateien) {
+            await showMD(md)
+        }
+
+    })
+
+}
+
+const showMD = async (datei) => {
+
+    console.clear();
+    console.log('Dateiname:', datei)
+    mdContentDiv.value = "";
+
+    const dateiButton = document.createElement("button");
+    dateiButton.textContent = ` ${datei.name}`;
+    mdDiv.appendChild(dateiButton)
+    dateiButton.addEventListener('click', async () => {
+        const singleMd = await getDateibyId(datei.id);
+        const inhalt = singleMd.singleDatei;
+        console.log(inhalt)
+        mdContentDiv.value = inhalt;
+        mdContentDiv.style.display = 'block';
+    })
+}
+
+const createButtons = async (folder) => {
+    const ordnerListe = folder.ordner;
+
+    for (const ordner of ordnerListe) {
+        if (ordner.name !== ".obsidian") {
+
+            const ordnerButton = document.createElement("button");
+            ordnerButton.textContent = ` ${ordner.name}`;
+            ordnerContainer.appendChild(ordnerButton);
+
+
+            ordnerButton.addEventListener('click', async () => {
+                const alleDateien = await getDateien(ordner.id);
+                mdDiv.innerHTML = '';
+                unterordnerDiv.innerHTML = '';
+
+
+                for (const datei of alleDateien.mdDateien) {
+                    if (datei.mimeType === 'application/vnd.google-apps.folder') {
+                        await unterordner(datei)
+
+                    } else {
+                        await showMD(datei)
+                    }
+
+                }
+            })
+        }
+    }
+}
+
+
+const main = async () => {
+    console.log(`Aktueller Zugriff über: ${API}`);
+    const obsidianFolder = await getalleDateien(obsidianID);
+    await createButtons(obsidianFolder)
+    console.log('Hauptordner:', obsidianFolder);
+}
+
+
+main()
