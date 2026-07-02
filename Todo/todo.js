@@ -4,8 +4,10 @@ const API = (window.location.hostname === 'localhost' || window.location.hostnam
   ? 'http://localhost:8080' 
   : 'https://nodeserver-995188789852.europe-west3.run.app';
 
+  const toDoId = '1LotmSZ37UUnLDGcOXpKEGTwoBtJDk0C1wIqB1VayEVc';
+
 async function laden() {
-    const res = await fetch(`${API}/api/todo`);
+    const res = await fetch(`${API}/api/googledoc/${toDoId}`);
     const data = await res.json();
     
     // Bereinige den Text vor der Anzeige
@@ -27,7 +29,7 @@ input.addEventListener('submit', async (e) => {
     eingabeText = eingabeText.replace(/[\r\n]{3,}/g, '\n\n');
     
     // HIER: Verwende auch die API-Variable für PUT
-    const res = await fetch(`${API}/api/todo/change`, {
+    const res = await fetch(`${API}/api/googledoc/change/${toDoId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: eingabeText })
