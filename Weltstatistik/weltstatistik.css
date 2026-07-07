@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: blueviolet;;
+}
+
+body{
+  
+    background-color: #f4f4f4;
+    color: var(--primary-color);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+h1 {
+
+    margin: 1rem;
+}
+
+
+
+.select-container select {
+    
+    border: none;
+    outline: none; 
+    padding: 0.5rem;
+    color: #333;
+    font-style: italic;
+   
+}
+
+
+.card {
+    margin:1rem;
+    border: 2px solid  var(--primary-color);
+    border-radius: 5px;
+}
+
+.card p {
+    padding:1rem;
+}
