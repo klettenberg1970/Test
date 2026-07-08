@@ -17,15 +17,10 @@ const einzelLand = async (id) =>{
 
 const laendernamen = async () => {
     const namen = await alleLaender();
-    console.log(namen)
-    const namenArray = [];
-
-    for (const land of namen.data) {
-        if (land.region === 'Europe & Central Asia') {
-            namenArray.push(land.name)
-        }
-    }
-    return namenArray
+    console.log('Daten',namen);
+    
+    // map() erstellt ein neues Array mit den Namen
+    return namen.data.map(land => land.name);
 }
 
 const getDaten = async(land) =>{
@@ -47,10 +42,11 @@ const main = async () => {
         }
         
         const selectedLand = await auswahl(namen);
+       
         const laenderDaten = await getDaten(selectedLand);
         const id = laenderDaten.id;
         const einzelDaten = await einzelLand(id);
-        showDaten(einzelDaten.indicators);
+        showDaten(einzelDaten.indicators,selectedLand);
     }
 }
 

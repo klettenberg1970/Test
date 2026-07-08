@@ -39,12 +39,53 @@ h1 {
 }
 
 
-.card {
-    margin:1rem;
-    border: 2px solid  var(--primary-color);
-    border-radius: 5px;
+.titel{
+
+    text-align: center;
+    margin: 1rem;
 }
 
-.card p {
-    padding:1rem;
+
+.card {
+    margin: 1rem;
+    background-color: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card p, .card h3 {
+    padding: 1rem;
+    
+}
+
+/* Alle HRs in der Card */
+.card hr {
+    height: 2px;
+    background-color: var(--primary-color);
+    border: none; /* Wichtig: Standard-Border entfernen */
+ width: 90%;
+    margin: 0.5rem auto; /* Optional: Abstand */
+}
+
+.card h3 {
+text-align: center;
+}
+
+
+.card .category {
+    /* Style für Category */
+    color: black;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.card .value {
+    /* Style für Value */
+    color: blue;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
 }
