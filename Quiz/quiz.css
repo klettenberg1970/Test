@@ -55,18 +55,24 @@ body{
 }
 
 
-.quiz-card hr {
+.quiz-card hr,
+.loesung hr {
     height: 2px;
     background-color: var(--primary-color);
     border: none; /* Wichtig: Standard-Border entfernen */
- width: 90%;
+ 
     margin: 0.5rem auto; /* Optional: Abstand */
 }
+
+
 
 .kopf{
     display:flex;
     justify-content: space-around;
+    font-size:0.8rem;
 }
+
+
 
 
 .fragen-container{
@@ -116,6 +122,7 @@ text-align: center;
 
 .antwort{
     margin-bottom: 1rem;
+     white-space: pre-line;
 }
 
 

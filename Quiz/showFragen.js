@@ -46,30 +46,46 @@ export const showFrage = (aufgabe) => {
     // LOESUNG - Lösungsbereich
     // ============================================
     const loesung = document.querySelector('.loesung');
+    const linien = document.querySelectorAll('.loesung hr')
     const meldung = document.querySelector('.meldung');
     const antwort = document.querySelector('.antwort');
     const erklaertext = document.querySelector('.erklaertext');
+
 
     meldung.textContent = '';
     antwort.textContent = ``;
     erklaertext.textContent = '';
 
+    linien.forEach(linie => {
+        linie.style.display = 'none';
+    });
+
 
     optionen.forEach((option, index) => {
+
         let auswahl = aufgabe.optionen[index];
+
         option.textContent = auswahl
+
         option.addEventListener('click', () => {
             console.log(`Sie haben : ${auswahl} gewählt`)
+
+            linien.forEach(linie => {
+                linie.style.display = 'block';
+            });
+
             if (auswahl === aufgabe.antwort) {
                 console.log('Richtig');
                 meldung.textContent = 'Richtig !!!';
                 meldung.style.color = "green";
+
             } else {
                 console.log('Falsch');
                 meldung.textContent = 'Falsch !!!';
                 meldung.style.color = "red";
+
             }
-            antwort.textContent = `Richtige Antwort: ${aufgabe.antwort}`;
+            antwort.textContent = `  ${aufgabe.antwort}`;
             erklaertext.textContent = aufgabe.erklaertext
 
 
