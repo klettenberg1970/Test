@@ -1,6 +1,12 @@
-
+let frageCounter = 0;
+let richtigeAntworten = 0;
+let falscheAntworten = 0;
+let frageBeantwortet = false;
 
 export const showFrage = (aufgabe) => {
+
+    frageBeantwortet = false;
+
     // ============================================
     // QUIZ CONTAINER - Hauptcontainer
     // ============================================
@@ -16,81 +22,88 @@ export const showFrage = (aufgabe) => {
     // ============================================
     const kopf = document.querySelector('.kopf');
     const thema = document.querySelector('.thema');
-    thema.textContent = aufgabe.thema
     const level = document.querySelector('.level');
-    level.textContent = `Schwierigkeit: ${aufgabe.schwierigkeit}`
+
     // ============================================
     // FRAGEN-CONTAINER - Alle Fragen
     // ============================================
     const fragenContainer = document.querySelector('.fragen-container');
+    const frage = document.querySelector('.frage');
+    const optionen = document.querySelectorAll('.option');
 
-    const frage = document.querySelector('.frage')
-    frage.textContent = aufgabe.frage
-    const optionen = document.querySelectorAll('.option'); // Alle Fragen (NodeList)
-
-    // Einzelne Fragen (falls du sie separat brauchst)
-    const option1 = optionen[0];  // oder document.querySelectorAll('.option')[0]
+    const option1 = optionen[0];
     const option2 = optionen[1];
     const option3 = optionen[2];
     const option4 = optionen[3];
 
-
-
-
-    // ============================================
-    // FUSS - Footer-Bereich
-    // ============================================
     const fuss = document.querySelector('.fuss');
 
     // ============================================
     // LOESUNG - Lösungsbereich
     // ============================================
     const loesung = document.querySelector('.loesung');
-    const linien = document.querySelectorAll('.loesung hr')
+    const linien = document.querySelectorAll('.loesung hr');
     const meldung = document.querySelector('.meldung');
     const antwort = document.querySelector('.antwort');
     const erklaertext = document.querySelector('.erklaertext');
 
-
+    // Daten einfügen
+    thema.textContent = aufgabe.thema;
+    level.textContent = `Schwierigkeit: ${aufgabe.schwierigkeit}`;
+    frage.textContent = aufgabe.frage;
     meldung.textContent = '';
-    antwort.textContent = ``;
+    antwort.textContent = '';
     erklaertext.textContent = '';
 
+    // Linien verstecken
     linien.forEach(linie => {
         linie.style.display = 'none';
     });
 
+    // 👇 Zähler für Fragen erhöhen
+    frageCounter++;
+    console.log(`📊 Frage ${frageCounter} `);
 
+
+    // Optionen durchgehen
     optionen.forEach((option, index) => {
-
         let auswahl = aufgabe.optionen[index];
-
-        option.textContent = auswahl
+        option.textContent = auswahl;
 
         option.addEventListener('click', () => {
-            console.log(`Sie haben : ${auswahl} gewählt`)
+            // Prüfen ob schon beantwortet
+            if (frageBeantwortet) return;
 
+            console.log(`Sie haben : ${auswahl} gewählt`);
+
+            // Linien anzeigen
             linien.forEach(linie => {
                 linie.style.display = 'block';
             });
 
+            // Antwort prüfen
             if (auswahl === aufgabe.antwort) {
-                console.log('Richtig');
+               
+                richtigeAntworten += 1;
+
                 meldung.textContent = 'Richtig !!!';
                 meldung.style.color = "green";
-
             } else {
-                console.log('Falsch');
+                
+                falscheAntworten += 1;
+
                 meldung.textContent = 'Falsch !!!';
                 meldung.style.color = "red";
-
             }
+
+            // Lösung anzeigen
             antwort.textContent = `  ${aufgabe.antwort}`;
-            erklaertext.textContent = aufgabe.erklaertext
+            erklaertext.textContent = aufgabe.erklaertext;
 
-
-        })
+            // Frage als beantwortet markieren
+            frageBeantwortet = true;
+            console.log(`Richtige Antworten bisher : ${richtigeAntworten}`);
+            console.log(`Falsche Antworten bisher : ${falscheAntworten}`);
+        });
     });
-
-
-}
+};
