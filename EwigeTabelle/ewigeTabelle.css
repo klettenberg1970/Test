@@ -8,10 +8,10 @@
     --primary-color: #0062C4;
 }
 
-body{
+body {
     background-color: #f4f4f4;
     color: var(--primary-color);
-    display:flex;
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
@@ -20,19 +20,19 @@ nav {
     margin: 1rem;
 }
 
-nav h1{
+nav h1 {
     text-align: center;
 }
 
-main{
+main {
     margin: 1rem;
-    background-color:white;
-    border-radius:5px;
+    background-color: white;
+    border-radius: 5px;
     padding: 1rem;
-    overflow-x: auto; /* Für mobile Geräte */
+    overflow-x: auto;
 }
 
-main table{
+main table {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
@@ -42,20 +42,75 @@ main th, main td {
     border: 1px solid gainsboro;
     padding: 0.5rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.7rem;
 }
 
-main th{
+main th {
     background-color: var(--primary-color);
-    color:white;
+    color: white;
 }
 
-
+/* Spalten-Styling */
+.verein {
+    font-size: 1rem;
+    text-align: left;
+    padding-left: 15px;
+}
 
 /* Für kleinere Bildschirme */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     main th, main td {
         font-size: 0.7rem;
         padding: 4px 2px;
     }
+    
+    /* 
+      GENAU DIESE KATEGORIEN ausblenden:
+      - Siege
+      - Unentschieden  
+      - Niederlagen
+      - Tore für
+      - Tore gegen
+    */
+    .siege,
+    .unentschieden,
+    .niederlagen,
+    .tore-fuer,
+    .tore-gegen {
+        display: none;
+    }
+    
+    /* Verein-Spalte anpassen */
+    .verein {
+        font-size: 0.9rem;
+    }
+}
+
+
+.verein {
+    width: 30%;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 15px;
+}
+
+/* Alle anderen Spalten teilen sich den Rest */
+.platz,
+.punkte,
+.jahre,
+.spiele,
+.siege,
+.unentschieden,
+.niederlagen,
+.tore-fuer,
+.tore-gegen,
+.tordifferenz {
+    width: 7%; /* (100% - 30%) / 10 Spalten = 7% */
+}
+
+
+ td.punkte {
+    color:green;
+    font-weight: bold;
 }
