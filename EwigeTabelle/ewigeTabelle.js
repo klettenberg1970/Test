@@ -66,14 +66,21 @@ function tabelleZuGrid(table) {
   return grid;
 }
 
-/** Entfernt Fußnoten-Referenzen wie "[1]" und normalisiert Whitespace und Strich-Varianten. */
+/** Entfernt Fußnoten-Referenzen wie "[1]" oder "[A 1]" und normalisiert Whitespace und Strich-Varianten. */
 function normalisiereText(text) {
   if (text === undefined || text === null) return "";
   return text
-    .replace(/\[\d+\]/g, "")
+    .replace(/\[[^\]]*\]/g, "") // jede eckige Klammer-Fußnote entfernen, egal ob [1], [A 1], etc.
     .replace(/[\u2010\u2011\u2012\u2013\u2014\u2212]/g, "-") // diverse Gedankenstrich-/Minus-Varianten -> normaler Bindestrich
     .replace(/\s+/g, " ")
     .trim();
+}
+
+/** Entfernt führende Nullen und das "+"-Suffix aus dem Jahre-Feld (z.B. "01+" -> "1"), lässt "0" selbst unangetastet. */
+function parseJahre(text) {
+  return normalisiereText(text)
+    .replace(/\+$/, "")
+    .replace(/^0+(?=\d)/, "");
 }
 
 /** Parst eine Ganzzahl im deutschen Format (Punkt = Tausendertrenner, „–“/„-“ = leer). */
@@ -168,7 +175,7 @@ async function ladeEwigeTabelle() {
     ergebnis.push({
       platz: parseZahl(zeile[idx["Pl."]]),
       verein,
-      jahre: normalisiereText(zeile[idx["Jahre"]]),
+      jahre: parseJahre(zeile[idx["Jahre"]]),
       spiele: parseZahl(zeile[idx["Sp."]]),
       siege: parseZahl(zeile[idx["S"]]),
       unentschieden: parseZahl(zeile[idx["U"]]),
