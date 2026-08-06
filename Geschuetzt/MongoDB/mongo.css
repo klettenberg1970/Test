@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #006FDB;
+}
+
+body{
+  
+    background-color: #f4f4f4;
+    color: var(--primary-color);
+    display:flex;
+    flex-direction: column;
+}
+
+
+
+nav h1 {
+    text-align: center;
+    padding:1rem;
+}
+
+
+.rubrik-auswahl{
+    margin:1rem;
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    gap: 5rem;
+}
+
+ .rubrik-auswahl button {
+
+    width: 6rem;
+    margin: auto;
+    margin-top: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+
+    border-radius: 5px;
+
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.rubrik-auswahl button:hover {
+
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
