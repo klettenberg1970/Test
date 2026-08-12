@@ -1,0 +1,29 @@
+
+@import url('./Navigation/nav.css');
+@import url('./Spieltag/spieltag.css');
+@import url('./EwigeTabelle/ewigeTabelle.css');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #006FDB;
+    --background-color: #f4f4f4;
+    --navbackground-color: midnightblue;
+    --navtext-color: white;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+}
+
+
+

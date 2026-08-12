@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        #formular {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button::after {
+            content: "Suchen";
+        }
+
+        #ausgabe h1 { margin-top: 0; color: #333; font-size: 1.8rem; }
+        #ausgabe h2 { font-size: 1.1rem; color: #666; font-style: italic; margin-bottom: 15px; }
+        #ausgabe p { line-height: 1.6; color: #444; }
+    </style>
+    <title>Wikipedia</title>
+</head>
+
+<body>
+    <div class="container">
+        <form id="formular">
+            <input type="text" name="suche" placeholder="Was möchtest du wissen?">
+            <button type="submit"></button>
+        </form>
+
+        <div id="ausgabe"></div>
+    </div>
+
+    <script>
+        const formular = document.querySelector('#formular');
+        const ausgabe = document.querySelector('#ausgabe');
+
+        formular.onsubmit = async (event) => {
+            event.preventDefault();
+
+            const daten = new FormData(formular);
+            const suchbegriff = daten.get('suche');
+            formular.reset();
+
+            const data = await fetchWikiSummary(suchbegriff);
+            ausgabe.innerHTML = "";
+
+            if (data) {
+                const titel = document.createElement('h1');
+                const description = document.createElement('h2');
+                const extract = document.createElement('p');
+
+                titel.textContent = data.title;
+                description.textContent = data.description;
+                extract.textContent = data.extract;
+
+                ausgabe.appendChild(titel);
+                ausgabe.appendChild(description);
+                ausgabe.appendChild(extract);
+            }
+        };
+
+        async function fetchWikiSummary(suche) {
+            const searchUrl = `https://de.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(suche)}&limit=1&format=json&origin=*`;
+
+            try {
+                const searchRes = await fetch(searchUrl);
+                const searchData = await searchRes.json();
+
+                if (!searchData[1] || searchData[1].length === 0) return null;
+
+                const korrekterTitel = searchData[1][0];
+                const url = `https://de.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(korrekterTitel)}`;
+
+                const response = await fetch(url);
+                if (!response.ok) return null;
+
+                return await response.json();
+            } catch (error) {
+                return null;
+            }
+        }
+    </script>
+</body>
+
+</html>
