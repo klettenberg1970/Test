@@ -33,12 +33,14 @@ nav ul a {
         align-items: flex-start;
         width: fit-content;
         margin: 0 auto;
-        height: 15rem;
+        height: 10rem;
     }
 
     nav ul a {
         display: block;
         text-align: left;
+        font-size: 0.9rem;
+        font-weight: bold;
     }
 }
 

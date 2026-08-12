@@ -1,0 +1,58 @@
+
+.liga-auswahl {
+    margin: 1rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.liga-auswahl button {
+
+    background-color: var(--navbackground-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 7rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 0.7rem;
+
+
+}
+
+
+.ausgabe {
+    margin: 1rem;
+    width: 90%;
+    background-color: white;
+    color: var(--navbackground-color);
+    border-radius: 5px;
+    display:flex;
+    flex-direction: column;
+   
+}
+
+.ausgabe hr {
+
+    height: 2px;
+   background-color:var(--navbackground-color);
+    width: 80%;
+}
+
+
+
+.goalgetter {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Verteilt den Platz zwischen den Elementen */
+    width: 80%; /* Volle Breite */
+}
+
+.goalgetter p:first-child {
+    text-align: left;
+    
+}
+
+.goalgetter p:last-child {
+    text-align: right;
+   
+}
