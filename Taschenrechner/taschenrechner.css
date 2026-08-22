@@ -6,13 +6,14 @@ box-sizing: border-box;
 
 body{
 
-    background-color: rgb(211, 202, 202);
+    background-color: #f4f4f4;
     font-family: Verdana,Arial,sans-serif;
 }
 nav{
     display:flex;
     justify-content: center;
     margin-top: 6vh;
+    color: midnightblue;
 }
 
 main{
