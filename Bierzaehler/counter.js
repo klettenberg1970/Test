@@ -10,7 +10,7 @@ let counterValue = parseInt(localStorage.getItem("counter")) || 0;
 // UI aktualisieren
 const updateDisplay = () => {
     anzeige.textContent = counterValue;
-    console.log(`Der Counter ist ${counterValue}`);
+    
 }
 
 // In localStorage speichern und UI aktualisieren
