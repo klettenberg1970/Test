@@ -1,56 +1,70 @@
 * {
-margin:0;
-padding:0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
+:root {
+    --primary-color: #004B9C;
+}
 
+body {
     background-color: #f4f4f4;
-    font-family: Verdana,Arial,sans-serif;
-}
-nav{
-    display:flex;
-    justify-content: center;
-    margin-top: 6vh;
-    color: midnightblue;
-}
-
-main{
-
-    display:flex;
+    color: var(--primary-color);
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10vh;
-    
-     
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+
 }
 
-#display{
-
-    min-width:300px;
-    height:40px;
+.taschenrechner-container {
     background-color: white;
-    color:black;
-    padding:5px;
-    border:3px solid black;
-    margin-bottom: 10px;
-   
-}
-
-.Tastenfeld {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 Spalten, gleichmäßig verteilt */
-  grid-auto-rows: minmax(60px, auto);    /* Feste Höhe für Buttons */
-  gap: 8px;                              /* Abstand zwischen Buttons */
-  width: 300px;                          /* Gesamtbreite des Grids */
-  margin: 0 auto;                        /* Zentrieren */
-}
-
-.Tastenfeld button {
-  font-size: 1.2rem;
-  cursor: pointer;
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 380px; /* Hält ihn auf großer Ansicht kompakt */
+    /* height: 80vh;  <-- Komplett löschen oder auskommentieren! */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    gap: 15px; /* Sorgt für saubere Abstände zwischen den Elementen */
 }
 
 
+
+.titel{
+    margin:0.5rem 0 0.5rem 0;
+}
+
+.anzeige {
+    width: 100%;
+    
+}
+
+.anzeige input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius : 5px;
+}
+
+
+.tasten-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.tasten {
+    background-color: var(--primary-color);
+    color:white;
+    border:none;
+    border-radius: 3px;
+    padding:0.5rem;
+}

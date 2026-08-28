@@ -10,40 +10,44 @@
 </head>
 
 <body>
-    <nav>
-        <h1>Taschenrechner </h1>
-    </nav>
-    <main>
-        <input type="text" id="display" readonly>
 
-     <div class="Tastenfeld"> <!-- Container (Klasse kann umbenannt werden, z. B. "TastenContainer") -->
-    <button class="Tasten">(</button>
-    <button class="Tasten">)</button>
-    <button class="Tasten">E</button>
-    <button class="Tasten">C</button>
-    <button class="Tasten">7</button>
-    <button class="Tasten">8</button>
-    <button class="Tasten">9</button>
-    <button class="Tasten">/</button>
-    <button class="Tasten">4</button>
-    <button class="Tasten">5</button>
-    <button class="Tasten">6</button>
-    <button class="Tasten">*</button>
-    <button class="Tasten">1</button>
-    <button class="Tasten">2</button>
-    <button class="Tasten">3</button>
-    <button class="Tasten">-</button>
-    <button class="Tasten">0</button>
-    <button class="Tasten">.</button>
-    <button class="Tasten">=</button>
-    <button class="Tasten">+</button>
+    <div class="taschenrechner-container">
+        <div class ='titel'>
+            <h1>Taschenrechner </h1>
+        </div>
+        <div class="anzeige"><input type="text" value='0' readonly></div>
+      <div class="tasten-container">
+    <!-- Zeile 1 -->
+    <button class="tasten">C</button>
+    <button class="tasten">⌫</button>
+    <button class="tasten">%</button>
+    <button class="tasten">/</button>
+
+    <!-- Zeile 2 -->
+    <button class="tasten">7</button>
+    <button class="tasten">8</button>
+    <button class="tasten">9</button>
+    <button class="tasten">*</button>
+
+    <!-- Zeile 3 -->
+    <button class="tasten">4</button>
+    <button class="tasten">5</button>
+    <button class="tasten">6</button>
+    <button class="tasten">-</button>
+
+    <!-- Zeile 4 -->
+    <button class="tasten">1</button>
+    <button class="tasten">2</button>
+    <button class="tasten">3</button>
+    <button class="tasten">+</button>
+
+    <!-- Zeile 5 -->
+    <button class="tasten">+/-</button>
+    <button class="tasten">0</button>
+    <button class="tasten">.</button>
+    <button class="tasten">=</button>
 </div>
-
-
-
-
-
-    </main>
+    </div>
 
 </body>
 
