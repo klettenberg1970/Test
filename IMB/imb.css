@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #006FDB;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    
+}
+
+nav{
+    margin:1rem
+}
+nav  h3{
+    text-align: center;
+}
+
+
+nav img {
+    width: 50%;
+   
+    max-width: 200px;
+    height: auto;
+    margin: auto;
+     
+    display: block;
+}
+
+
+.kurs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.kurs-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 260px;
+    background: #f9f9f9;
+}
+
+.kurs-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.kurs-zeile {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.kurs-label {
+    font-weight: bold;
+}
