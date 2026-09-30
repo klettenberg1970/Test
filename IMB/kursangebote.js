@@ -1,5 +1,5 @@
 
-export const kursangebote = [
+export const integrationskurse = [
     {
         kursname: '663',
         kursart: 'Allgemeiner Integrationskurs',
@@ -56,3 +56,15 @@ export const kursangebote = [
         kursleiter: 'Leyla Demir'
     }
 ];
+
+export const bskB2 = [
+    {  
+        kursname: 'DeuFö 33',
+        kursart: 'BSK B2',
+        datum: '07.10.2026',
+        
+        tage: 'Dienstag, Donnerstag, Freitag',
+        uhrzeit: '8:30 -11:45',
+        kursleiter: 'Peter Kowalski'
+    },
+]
