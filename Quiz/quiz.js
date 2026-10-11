@@ -1,8 +1,12 @@
 import { showFrage } from "./showFragen.js";
 
-const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:8080'
-    : 'https://nodeserver-995188789852.europe-west3.run.app';
+// const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+//     ? 'http://localhost:3030'
+//     : 'https://nodeserver-995188789852.europe-west3.run.app';
+
+
+      const API = 'https://nodeserver-995188789852.europe-west3.run.app';
+
 
 console.log(API)
 
