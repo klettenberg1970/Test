@@ -1,46 +1,70 @@
 nav {
     background-color: var(--navbackground-color);
     width: 100%;
+    position: relative;
+    padding: 0.5rem 1rem;
 }
 
-nav ul {
-    list-style: none;
+.menubutton {
+    display: inline-block;
+    background: none;
+    border: none;
     color: var(--navtext-color);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
+nav .menuliste {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--navbackground-color);
+    z-index: 999;
+    list-style: none;
+    flex-direction: column;
+}
+
+nav .menuliste.aktiv {
+    display: flex;
+}
 
 nav ul li {
-    padding: 0.5rem;
+    padding: 0.75rem 1rem;
 }
 
 nav ul a {
     color: var(--navtext-color);
     text-decoration: none;
-    font-size: 1.2rem;
-      
+    font-size: 1.1rem;
 }
 
+/* Desktop-Ansicht ab 700px */
+@media (min-width: 700px) {
+    nav {
+        padding: 0 1rem;
+    }
 
-@media (max-width: 500px) {
-    nav ul {
+    .menubutton {
+        display: none;
+    }
+
+    nav .menuliste {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        width: fit-content;
-        margin: 0 auto;
-        height: 10rem;
+        position: static;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        height: 5rem;
+        z-index: auto;
+    }
+
+    nav ul li {
+        padding: 0.5rem;
     }
 
     nav ul a {
-        display: block;
-        text-align: left;
-        font-size: 0.9rem;
-        font-weight: bold;
+        font-size: 1.2rem;
     }
 }
-
