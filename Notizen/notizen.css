@@ -1,0 +1,52 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #006FDB;
+    --background-color: #f4f4f4;
+
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+}
+
+nav h1 {
+    text-align: center;
+    padding:1rem;
+}
+
+/* Grid für Notizen */
+.notizen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* Einzelne Notiz Karte */
+.note-card {
+    background: #fff;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    color: #000;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+.note-card h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+}
+.note-card p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
