@@ -18,6 +18,28 @@
             notizen.forEach(n => {
                 const card = document.createElement('div');
                 card.className = 'note-card';
+                // Button zum Löschen der Notiz hinzufügen
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = '×';
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.title = 'Notiz löschen';
+                deleteBtn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    try {
+                        const resp = await fetch(`${API}/api/v1/notizen/${n._id}`, {
+                            method: 'DELETE'
+                        });
+                        if (!resp.ok) throw new Error('Löschen fehlgeschlagen');
+                        // Entferne die Karte aus dem DOM
+                        card.remove();
+                        // Seite neu laden, um aktuelle Daten zu holen
+                        window.location.reload();
+                    } catch (err) {
+                        console.error('Fehler beim Löschen der Notiz:', err);
+                    }
+                });
+                // Button ans Card-Element anhängen
+                card.appendChild(deleteBtn);
     
                 const title = document.createElement('h2');
                 title.textContent = n.titel;
