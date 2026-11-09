@@ -39,13 +39,14 @@
                     }
                 });
                 // Button ans Card-Element anhängen
-                card.appendChild(deleteBtn);
+
+
+                const datum = document.createElement('p');
+                datum.textContent = ` ${n.datum}`;
+                datum.classList.add('datum')
     
                 const title = document.createElement('h2');
                 title.textContent = n.titel;
-    
-                const datum = document.createElement('p');
-                datum.textContent = `Datum: ${n.datum}`;
     
                 const kategorie = document.createElement('p');
                 kategorie.textContent = `Kategorie: ${n.kategorie}`;
@@ -59,8 +60,9 @@
                  const sonstiges = document.createElement('p');
                 sonstiges.textContent = n.sonstiges ? `Sonstiges: ${n.sonstiges}` : '';
     
-                card.appendChild(title);
-                card.appendChild(datum);
+                 card.appendChild(datum);
+                card.appendChild(deleteBtn);
+                card.appendChild(title);             
                 card.appendChild(kategorie);
                 card.appendChild(beschreibung);
                 if (n.vorschlag) card.appendChild(vorschlag);
