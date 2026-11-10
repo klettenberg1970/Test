@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Verbindungstest</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 480px;
+      margin: 40px auto;
+      padding: 0 16px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #ausgabe {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hallo von Claude!</h1>
+  <p>Diese Datei wurde über die GitHub-Verbindung befüllt.</p>
+
+  <button id="knopf">Klick mich</button>
+  <p id="ausgabe"></p>
+
+  <script>
+    let zaehler = 0;
+    const knopf = document.getElementById('knopf');
+    const ausgabe = document.getElementById('ausgabe');
+
+    knopf.addEventListener('click', () => {
+      zaehler++;
+      ausgabe.textContent = `Du hast ${zaehler}-mal geklickt.`;
+    });
+  </script>
+</body>
+</html>
