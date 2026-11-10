@@ -5,40 +5,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="index.css">
-  <title>Test</title>
+  <title>Startseite</title>
 </head>
 
 <body>
 
-  <!-- <nav>
-
-    <button id="toggle">Dunkel</button>
-
-    <p id="datum"></p>
-    <p id="uhrzeit"></p>
-  </nav> -->
-
+  <header>
+    <div class="header-inner">
+      <div class="header-brand">
+        <span class="header-logo">⚡</span>
+        <h1>Meine Projekte</h1>
+      </div>
+      <div class="header-controls">
+        <span id="datum"></span>
+        <span id="uhrzeit"></span>
+        <button id="toggle" aria-label="Dark Mode umschalten">🌙 Dunkel</button>
+      </div>
+    </div>
+  </header>
 
   <main>
-    <div class="links">
-      <a href="Bierzaehler/counter.html"> Bierzähler</a>
-      <a href="Html/claude.html">Claude</a>
-       <a href="Freetogame/freetogame.html"> Freetogame</a>
-      <a href="Fussball/fussball.html"> Fußball</a>
-      <a href="Geschuetzt/PasswortAbfrage/passwortAbfrage.html"> Geschützter Bereich</a>
-      <a href="IMB/imb.html"> IMB</a>
-      <a href="Notizen/notizen.html">Notizen</a>
-      <a href="Quiz/quiz.html"> Quiz</a>
-      <a href="Tagesschau/tagesschau.html"> Tagesschau</a>
-      <a href="Taschenrechner/taschenrechner.html"> Taschenrechner</a>
-      <a href="Todo/todo.html"> ToDo</a>
-      <a href="Uebersetzung/uebersetzen.html"> Übersetzung</a>
-      <a href="Weltstatistik/weltstatistik.html"> Weltstatistik</a>
-      <a href="Html/wetter.html"> Wetter</a>
-      <a href="Zufallszahlen/zufallszahlen.html"> Zufallszahlen</a>
+    <p class="subtitle">Wähle ein Projekt aus</p>
+
+    <div class="card-grid">
+
+      <a href="Bierzaehler/counter.html" class="card">
+        <span class="card-icon">🍺</span>
+        <span class="card-label">Bierzähler</span>
+      </a>
+
+      <a href="Html/claude.html" class="card">
+        <span class="card-icon">🤖</span>
+        <span class="card-label">Claude</span>
+      </a>
+
+      <a href="Freetogame/freetogame.html" class="card">
+        <span class="card-icon">🎮</span>
+        <span class="card-label">Freetogame</span>
+      </a>
+
+      <a href="Fussball/fussball.html" class="card">
+        <span class="card-icon">⚽</span>
+        <span class="card-label">Fußball</span>
+      </a>
+
+      <a href="Geschuetzt/PasswortAbfrage/passwortAbfrage.html" class="card">
+        <span class="card-icon">🔒</span>
+        <span class="card-label">Geschützter Bereich</span>
+      </a>
+
+      <a href="IMB/imb.html" class="card">
+        <span class="card-icon">📊</span>
+        <span class="card-label">IMB</span>
+      </a>
+
+      <a href="Notizen/notizen.html" class="card">
+        <span class="card-icon">📝</span>
+        <span class="card-label">Notizen</span>
+      </a>
+
+      <a href="Quiz/quiz.html" class="card">
+        <span class="card-icon">❓</span>
+        <span class="card-label">Quiz</span>
+      </a>
+
+      <a href="Tagesschau/tagesschau.html" class="card">
+        <span class="card-icon">📰</span>
+        <span class="card-label">Tagesschau</span>
+      </a>
+
+      <a href="Taschenrechner/taschenrechner.html" class="card">
+        <span class="card-icon">🔢</span>
+        <span class="card-label">Taschenrechner</span>
+      </a>
+
+      <a href="Todo/todo.html" class="card">
+        <span class="card-icon">✅</span>
+        <span class="card-label">ToDo</span>
+      </a>
+
+      <a href="Uebersetzung/uebersetzen.html" class="card">
+        <span class="card-icon">🌍</span>
+        <span class="card-label">Übersetzung</span>
+      </a>
+
+      <a href="Weltstatistik/weltstatistik.html" class="card">
+        <span class="card-icon">🌐</span>
+        <span class="card-label">Weltstatistik</span>
+      </a>
+
+      <a href="Html/wetter.html" class="card">
+        <span class="card-icon">🌤️</span>
+        <span class="card-label">Wetter</span>
+      </a>
+
+      <a href="Zufallszahlen/zufallszahlen.html" class="card">
+        <span class="card-icon">🎲</span>
+        <span class="card-label">Zufallszahlen</span>
+      </a>
 
     </div>
-
   </main>
 
   <webcomponents-footer></webcomponents-footer>
