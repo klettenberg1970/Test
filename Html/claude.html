@@ -3,43 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Verbindungstest</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 480px;
-      margin: 40px auto;
-      padding: 0 16px;
-      text-align: center;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      background-color: aqua;
-    }
-    #ausgabe {
-      margin-top: 20px;
-      font-size: 1.2rem;
-    }
-  </style>
+  <title>Claude – Überblick</title>
+  <link rel="stylesheet" href="claude.css">
 </head>
 <body>
-  <h1>Hallo von Claude!</h1>
-  <p>Diese Datei wurde über die GitHub-Verbindung befüllt.</p>
+  <header class="kopf">
+    <h1>Hallo von Claude!</h1>
+    <p>Diese Datei wurde über die GitHub-Verbindung befüllt.</p>
 
-  <button id="knopf">Klick mich</button>
-  <p id="ausgabe"></p>
+    <button id="knopf">Klick mich</button>
+    <p id="ausgabe"></p>
+  </header>
 
-  <script>
-    let zaehler = 0;
-    const knopf = document.getElementById('knopf');
-    const ausgabe = document.getElementById('ausgabe');
+  <main>
+    <section class="intro">
+      <h2>Was ist Claude?</h2>
+      <p>
+        Claude ist ein KI-Assistent von <strong>Anthropic</strong>. Er kann Fragen
+        beantworten, Texte schreiben und überarbeiten, Daten auswerten, programmieren
+        und mehrstufige Aufgaben selbstständig erledigen. Du erreichst ihn über die
+        Claude-App, in Entwicklungswerkzeugen oder direkt über eine Schnittstelle (API).
+      </p>
+    </section>
 
-    knopf.addEventListener('click', () => {
-      zaehler++;
-      ausgabe.textContent = `Du hast ${zaehler}-mal geklickt.`;
-    });
-  </script>
+    <section>
+      <h2>Optionen im Überblick</h2>
+      <p class="hinweis">Wähle eine Kategorie, um die Karten zu filtern.</p>
+
+      <div class="filter" role="group" aria-label="Kategorie wählen">
+        <button class="filter-knopf aktiv" data-filter="alle">Alle</button>
+        <button class="filter-knopf" data-filter="modelle">Modelle</button>
+        <button class="filter-knopf" data-filter="apps">Apps &amp; Werkzeuge</button>
+        <button class="filter-knopf" data-filter="funktionen">Funktionen</button>
+      </div>
+
+      <div class="raster">
+        <!-- Modelle -->
+        <article class="karte" data-kategorie="modelle">
+          <span class="etikett">Modell</span>
+          <h3>Claude Haiku 5.5</h3>
+          <p>Das kompakte Modell der Familie: schnell und leicht, gut für einfache und umfangreiche Aufgaben.</p>
+        </article>
+        <article class="karte" data-kategorie="modelle">
+          <span class="etikett">Modell</span>
+          <h3>Claude Sonnet 5.5</h3>
+          <p>Ein kluges, effizientes Modell für den Alltag: ein guter Mittelweg aus Tempo und Qualität.</p>
+        </article>
+        <article class="karte" data-kategorie="modelle">
+          <span class="etikett">Modell</span>
+          <h3>Claude Opus 5.5</h3>
+          <p>Die stärkere Stufe für anspruchsvolle Aufgaben, bei denen es auf Tiefe und Genauigkeit ankommt.</p>
+        </article>
+        <article class="karte" data-kategorie="modelle">
+          <span class="etikett">Modell</span>
+          <h3>Claude Fable 5.2</h3>
+          <p>Gehört zur obersten Stufe („Mythos-Tier“), mit zusätzlichen Sicherheitsmaßnahmen für Biologie und Cybersicherheit.</p>
+        </article>
+
+        <!-- Apps & Werkzeuge -->
+        <article class="karte" data-kategorie="apps">
+          <span class="etikett">App</span>
+          <h3>Claude (Web, Desktop, Mobil)</h3>
+          <p>Die Haupt-App zum Chatten, Recherchieren und für längere Aufgaben mit fertigen Ergebnissen.</p>
+        </article>
+        <article class="karte" data-kategorie="apps">
+          <span class="etikett">Werkzeug</span>
+          <h3>Claude Code</h3>
+          <p>Hilft Entwicklern beim Programmieren, im Terminal, im Web, auf dem Desktop und mobil.</p>
+        </article>
+        <article class="karte" data-kategorie="apps">
+          <span class="etikett">Werkzeug</span>
+          <h3>Claude Science</h3>
+          <p>Eine Arbeitsumgebung für Forschende, die auf den eigenen Rechnern des Labors läuft.</p>
+        </article>
+        <article class="karte" data-kategorie="apps">
+          <span class="etikett">Werkzeug</span>
+          <h3>Claude Security</h3>
+          <p>Findet und behebt Schwachstellen in einer Codebasis, gedacht für Sicherheitsteams.</p>
+        </article>
+        <article class="karte" data-kategorie="apps">
+          <span class="etikett">Schnittstelle</span>
+          <h3>Console &amp; API</h3>
+          <p>Damit bauen Entwickler Claude in eigene Anwendungen ein.</p>
+        </article>
+        <article class="karte" data-kategorie="apps">
+          <span class="etikett">Integration</span>
+          <h3>Claude in anderen Tools</h3>
+          <p>Verfügbar in Chrome, Microsoft 365, Google Workspace und als Claude Tag in Slack.</p>
+        </article>
+
+        <!-- Funktionen -->
+        <article class="karte" data-kategorie="funktionen">
+          <span class="etikett">Funktion</span>
+          <h3>Projekte &amp; Artifacts</h3>
+          <p>Projekte bündeln Material zu einem Thema. Artifacts sind fertige Seiten, Dokumente oder Tools zum Weiterverwenden.</p>
+        </article>
+        <article class="karte" data-kategorie="funktionen">
+          <span class="etikett">Funktion</span>
+          <h3>Skills &amp; Plugins</h3>
+          <p>Wiederverwendbare Anleitungen und Erweiterungen, mit denen Claude bestimmte Aufgaben zuverlässig erledigt.</p>
+        </article>
+        <article class="karte" data-kategorie="funktionen">
+          <span class="etikett">Funktion</span>
+          <h3>Konnektoren</h3>
+          <p>Verbinden Claude mit deinen Apps, zum Beispiel mit GitHub, damit er direkt mit deinen Daten arbeiten kann.</p>
+        </article>
+        <article class="karte" data-kategorie="funktionen">
+          <span class="etikett">Funktion</span>
+          <h3>Sprachmodus</h3>
+          <p>Du sprichst mit Claude, statt zu tippen. Das geht auch im Auto mit CarPlay.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="links">
+      <h2>Mehr erfahren</h2>
+      <ul>
+        <li><a href="https://support.claude.com" target="_blank" rel="noopener">Hilfe-Center (Konto, Funktionen, Limits)</a></li>
+        <li><a href="https://docs.claude.com" target="_blank" rel="noopener">Dokumentation für Entwickler (API)</a></li>
+        <li><a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="fuss">
+    <p>Angebote und Modelle ändern sich. Aktuelle Details stehen im Hilfe-Center.</p>
+  </footer>
+
+  <script src="claude.js"></script>
 </body>
 </html>
