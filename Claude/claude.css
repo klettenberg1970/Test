@@ -63,7 +63,8 @@ button {
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
-  background-color: aqua;
+  background-color: #D97757;
+  color:white
 }
 
 #ausgabe {
