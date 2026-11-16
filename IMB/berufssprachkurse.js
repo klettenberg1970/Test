@@ -1,14 +1,7 @@
-import {bskB2} from './kursangebote.js'
-
+import { bskB2 } from './kursangebote.js';
 
 export const bsk = () => {
-    const container = document.querySelector('.bsk-container');
-
-    for (const kurs of bskB2){
-        console.log('B2 kommt noch')
-    }
-
-
-}
-
-
+    // B2-Highlight-Block wird direkt in der HTML-Hero-Section angezeigt.
+    // Hier könnten weitere BSK-Karten ausgegeben werden, wenn vorhanden.
+    console.log('BSK B2 Kurs geladen:', bskB2);
+};

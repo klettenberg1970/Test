@@ -5,26 +5,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="imb.css">
-  <title>IMB</title>
+  <title>IMB – Institut für Migration und Bildung</title>
 </head>
 
 <body>
-  <nav>
 
-    <img src="imb.png" alt="IMB">
-  </nav>
+  <!-- HEADER / NAV -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https://imb-koeln.de/" target="_blank" rel="noopener" class="logo-link" aria-label="IMB Köln – zur offiziellen Website">
+        <!-- SVG-Logo in Blau/Weiß/Schwarz -->
+        <svg class="logo-svg" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Blauer Balken links -->
+          <rect x="0" y="0" width="8" height="60" rx="2" fill="#1565C0"/>
+          <!-- IMB Text -->
+          <text x="18" y="44" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="900" fill="#FFFFFF" letter-spacing="3">IMB</text>
+          <!-- Unterzeile -->
+          <text x="18" y="57" font-family="Arial, Helvetica, sans-serif" font-size="8" fill="#90CAF9" letter-spacing="1">INSTITUT FÜR MIGRATION UND BILDUNG</text>
+        </svg>
+      </a>
+      <nav class="main-nav">
+        <a href="https://imb-koeln.de/" target="_blank" rel="noopener" class="nav-link">🌐 imb-koeln.de</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <div class="mitteilung">
-      <h3> Unsere Angebote für Berufssprachkurse erscheinen bald </h3>
-      <p> Außerdem bieten wir bald DTZ-Vorbereitungskurse für einen fairen Preis an </p>
 
-    </div>
+    <!-- HERO: B2-KURS HIGHLIGHT -->
+    <section class="hero-b2">
+      <div class="hero-inner">
+        <div class="hero-badge">🆕 Jetzt neu</div>
+        <h1 class="hero-title">Berufssprachkurs B1 startet!</h1>
+        <p class="hero-sub">Unser neuer <strong>DeuFö B1</strong>-Kurs beginnt am <strong>07. Dezember 2026</strong>.<br>
+          Jetzt anmelden und Deutsch auf höchstem Niveau lernen – für Beruf und Karriere.</p>
+        <div class="hero-details">
+          <span class="detail-chip">📅 Mo,Di,Mi,Do</span>
+          <span class="detail-chip">🕗 08:15 – 12:15 Uhr</span>
+          <span class="detail-chip">👩‍🏫 Kursleitung: Peter Kowalski</span>
+        </div>
+        <a href="https://imb-koeln.de/" target="_blank" rel="noopener" class="btn-primary">Jetzt anmelden →</a>
+      </div>
+    </section>
 
-    <div class="bsk-container"></div>
-    <div class="kurs-container"></div>
-    </div>
+    <!-- MITTEILUNG -->
+    <section class="mitteilung">
+      <h2>📢 Aktuelle Ankündigungen</h2>
+      <p>Unsere <strong>Berufssprachkurse</strong> starten neu – informieren Sie sich über das vollständige Angebot auf <a href="https://imb-koeln.de/" target="_blank" rel="noopener">imb-koeln.de</a>.</p>
+      <p>Außerdem bieten wir bald <strong>DTZ-Vorbereitungskurse</strong> zu einem fairen Preis an.</p>
+    </section>
+
+    <!-- INTEGRATIONSKURSE -->
+    <section class="kurs-section">
+      <div class="section-header">
+        <h2>Integrationskurse</h2>
+        <p class="section-sub">Unser laufendes Kursangebot – allgemeine und Alphabetisierungskurse</p>
+      </div>
+      <div class="kurs-container" id="kurs-container"></div>
+    </section>
+
   </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>© 2026 IMB – Institut für Migration und Bildung Köln &nbsp;|&nbsp;
+      <a href="https://imb-koeln.de/" target="_blank" rel="noopener">imb-koeln.de</a>
+    </p>
+  </footer>
+
   <script type="module" src="main.js"></script>
 </body>
 
