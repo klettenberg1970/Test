@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wetter Köln — Live & Vorhersage</title>
+    <title>Wetter Köln</title>
+    <meta name="description" content="Eine moderne Wetter-App für Köln mit aktueller Wetterlage und 5-Tage-Vorhersage auf Basis der Open-Meteo API.">
+    <meta property="og:title" content="Wetter Köln">
+    <meta property="og:description" content="Eine moderne Wetter-App für Köln mit aktueller Wetterlage und 5-Tage-Vorhersage auf Basis der Open-Meteo API.">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -22,7 +25,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@405;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <!-- Lucide Icons via CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -36,7 +39,6 @@
         .font-mono {
             font-family: 'JetBrains Mono', monospace;
         }
-        /* Custom scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
             height: 6px;
         }
@@ -75,20 +77,13 @@
                     </div>
                     <div class="flex items-center gap-1.5 text-xs text-slate-400">
                         <span>Standort:</span>
-                        <span id="active-landmark-name" class="font-semibold text-slate-300">Köln (Zentrum)</span>
+                        <span id="active-location-name" class="font-semibold text-slate-300">Köln</span>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                <!-- Landmark Selector -->
-                <div class="flex bg-slate-950/85 p-0.5 rounded-lg border border-slate-800 text-xs w-full sm:w-auto overflow-x-auto custom-scrollbar">
-                    <button onclick="changeLandmark('city')" id="btn-city" class="landmark-btn px-3 py-1.5 rounded-md font-medium whitespace-nowrap transition-all duration-300 bg-slate-800 text-white shadow-sm">Zentrum</button>
-                    <button onclick="changeLandmark('dom')" id="btn-dom" class="landmark-btn px-3 py-1.5 rounded-md font-medium whitespace-nowrap transition-all duration-200 text-slate-400 hover:text-slate-200">Domplatte</button>
-                    <button onclick="changeLandmark('rheinau')" id="btn-rheinau" class="landmark-btn px-3 py-1.5 rounded-md font-medium whitespace-nowrap transition-all duration-200 text-slate-400 hover:text-slate-200">Rheinauhafen</button>
-                    <button onclick="changeLandmark('ehrenfeld')" id="btn-ehrenfeld" class="landmark-btn px-3 py-1.5 rounded-md font-medium whitespace-nowrap transition-all duration-200 text-slate-400 hover:text-slate-200">Ehrenfeld</button>
-                </div>
-
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                <span class="text-xs font-mono text-slate-400">50.94° N, 6.96° O</span>
                 <button onclick="fetchWeather()" id="refresh-btn" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 transition-all flex items-center justify-center cursor-pointer" title="Aktualisieren">
                     <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                 </button>
@@ -101,14 +96,14 @@
             <div>
                 <p class="font-bold text-sm">Abruffehler</p>
                 <p id="error-message" class="text-xs text-rose-300/90 mt-0.5">Daten konnten nicht geladen werden.</p>
-                <button onclick="fetchWeather()" class="mt-2 text-xs font-bold text-rose-400 hover:text-rose-300 underline">Erneut versuchen</button>
+                <button onclick="fetchWeather()" class="mt-2 text-xs font-bold text-rose-400 hover:text-rose-300 underline cursor-pointer">Erneut versuchen</button>
             </div>
         </div>
 
         <!-- Loading State -->
         <div id="loading-spinner" class="py-24 flex flex-col items-center justify-center gap-4">
             <div class="w-12 h-12 border-4 border-sky-500/20 border-t-sky-500 rounded-full animate-spin"></div>
-            <p class="text-sm font-mono text-slate-400">Rufe Echtzeitdaten von Open-Meteo ab...</p>
+            <p class="text-sm font-mono text-slate-400">Rufe Echtzeitdaten für Köln ab...</p>
         </div>
 
         <!-- Main Content (Hidden during load) -->
@@ -132,14 +127,14 @@
                             <div class="space-y-1">
                                 <div class="flex items-baseline gap-1">
                                     <span id="current-temp" class="text-6xl md:text-7xl font-display font-extrabold tracking-tighter text-white">--</span>
-                                    <span class="text-4xl md:text-5xl font-display font-semibold text-white">°C</span>
+                                    <span id="current-temp-unit" class="text-4xl md:text-5xl font-display font-semibold text-white">°C</span>
                                 </div>
                                 <h2 id="current-status" class="text-xl md:text-2xl font-bold tracking-tight text-white">--</h2>
                             </div>
 
-                            <div class="flex items-center gap-2 text-xs opacity-80 text-white">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-                                <span id="current-landmark-desc" class="font-medium">--</span>
+                            <div class="flex items-center gap-2 text-xs opacity-80">
+                                <i data-lucide="map-pin" id="current-location-pin" class="w-3.5 h-3.5"></i>
+                                <span id="current-location-desc" class="font-medium">--</span>
                             </div>
                         </div>
 
@@ -192,7 +187,7 @@
                     <div class="flex items-center justify-between gap-2 mb-4">
                         <div class="flex items-center gap-2">
                             <i data-lucide="clock" class="w-4 h-4 text-sky-400"></i>
-                            <h3 class="font-display font-semibold text-lg text-white">24-Stunden-Prognose</h3>
+                            <h3 class="font-display font-semibold text-lg text-white">24-Stunden-Temperaturverlauf</h3>
                         </div>
                         <span class="text-xs text-slate-400 bg-slate-950 px-2.5 py-1 rounded-full border border-slate-800">
                           Horizontales Diagramm
@@ -218,25 +213,31 @@
                             <line x1="0" y1="100" x2="800" y2="100" stroke="rgba(255,255,255,0.03)" stroke-dasharray="3 3" />
                             <path id="chart-area" d="" fill="url(#chartGradient)"></path>
                             <path id="chart-line" d="" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"></path>
+                            <g id="chart-hover-indicator" class="hidden">
+                                <line id="chart-hover-line" x1="0" y1="0" x2="0" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="4 4" />
+                                <circle id="chart-hover-dot" cx="0" cy="0" r="6" fill="#ffffff" stroke="#38bdf8" stroke-width="3" />
+                            </g>
                             <g id="chart-labels"></g>
                         </svg>
                     </div>
 
                     <!-- Hourly cards list container -->
-                    <div id="hourly-cards-container" class="flex gap-2 pb-2 overflow-x-auto scrollbar-thin custom-scrollbar">
+                    <div id="hourly-cards-container" class="flex gap-2 pb-2 overflow-x-auto custom-scrollbar">
                         <!-- Instantiated by JS -->
                     </div>
                 </section>
 
-                <!-- Rheinische Wetter-Anekdote -->
+                <!-- Köln Wetterprofil -->
                 <section class="bg-slate-900/40 border border-slate-800/60 p-5 rounded-2xl backdrop-blur-md relative overflow-hidden">
                     <div class="flex items-start gap-4">
                         <div class="p-3 bg-slate-800 text-sky-400 rounded-xl">
                             <i data-lucide="info" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <h4 id="fact-title" class="text-sm font-bold text-white mb-1">Rheinisches Lokalkolorit</h4>
-                            <p id="fact-text" class="text-xs text-slate-300 leading-relaxed">Wusstest du schon? Am Kölner Rheinufer weht meist eine frische Brise, die das Wettergeschehen über der Altstadt positiv beeinflusst.</p>
+                            <h4 id="fact-title" class="text-sm font-bold text-white mb-1">Wetterprofil Köln</h4>
+                            <p id="fact-text" class="text-xs text-slate-300 leading-relaxed">
+                                Die Rheinmetropole Köln liegt in der Kölner Bucht und zeichnet sich durch ein mildes, maritim geprägtes Klima aus. Die Daten werden in Echtzeit berechnet und zeigen die aktuelle atmosphärische Prognose für Köln (50.94° N, 6.96° O) an.
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -263,12 +264,12 @@
                         <!-- Populated dynamically via JS -->
                     </div>
 
-                    <!-- iOS Slider Footnote -->
+                    <!-- Range Bar Footnote -->
                     <div class="mt-5 p-3.5 bg-slate-950/90 rounded-2xl border border-slate-800/60 flex items-start gap-2.5 text-[11px] text-slate-400 leading-relaxed">
                         <i data-lucide="help-circle" class="w-4 h-4 shrink-0 text-sky-400 mt-0.5"></i>
                         <div>
-                            <p class="font-semibold text-slate-300 mb-0.5">iOS-artige Balkenanzeige</p>
-                            Die farbigen Balken symbolisieren den täglichen Temperaturbereich relativ zur kältesten und wärmsten Messung der kommenden 5 Tage.
+                            <p class="font-semibold text-slate-300 mb-0.5">Temperaturbereich-Balken</p>
+                            Die farbigen Balken symbolisieren den täglichen Temperaturbereich relativ zur kältesten und wärmsten Messung der kommenden 5 Tage in Köln.
                         </div>
                     </div>
                 </section>
@@ -277,12 +278,12 @@
                 <section class="bg-slate-900/80 border border-slate-800/80 rounded-3xl p-5 md:p-6 shadow-xl relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-teal-500/10 pointer-events-none blur-xl rounded-full"></div>
                     <h3 class="font-display font-semibold text-base text-white mb-2 flex items-center gap-1.5">
-                        <i data-lucide="layers" class="w-4.5 h-4.5 text-teal-400"></i>
+                        <i data-lucide="layers" class="w-4 h-4 text-teal-400"></i>
                         Technik dieser Standalone-Datei
                     </h3>
                     <div class="space-y-2.5 text-xs text-slate-300">
                         <p class="leading-relaxed">
-                            Diese Datei ist komplett unabhängig und kann per Doppelklick geöffnet werden. Sie lädt **Tailwind CSS v3** sowie wetterfeste Vektor-Icons direkt aus verlässlichen CDNs.
+                            Diese Datei ist komplett eigenständig und kann direkt im Browser geöffnet werden. Sie nutzt <strong class="text-white font-semibold">Tailwind CSS</strong> sowie Vektor-Icons und ruft Live-Wetterdaten für Köln ab.
                         </p>
                         <div class="space-y-1 pt-1 opacity-90">
                             <div class="flex justify-between border-b border-slate-800 pb-1 font-mono text-[10.5px]">
@@ -311,8 +312,6 @@
             <div class="flex items-center gap-1.5">
                 <span>Powered by</span>
                 <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-sky-400 hover:underline transition-colors font-semibold">Open-Meteo</a>
-                <span>&</span>
-                <span class="text-slate-400 font-semibold">Gemini AI Studio</span>
             </div>
         </footer>
 
@@ -320,19 +319,21 @@
 
     <!-- Application Script Logic -->
     <script>
-        // Landmarks Config
-        const LANDMARKS = {
-            city: { id: "city", name: "Köln (Zentrum)", description: "Gesamtstadt Köln mit Blick auf den Dom & Rhein", lat: 50.94, lon: 6.96, narrative: "Der Kölner Dom ragt majestätisch in den rheinischen Himmel. Das Rheinufer lädt zum gemütlichen Spaziergang ein." },
-            dom: { id: "dom", name: "Domplatte", description: "Historisches Herz am Kölner Hauptbahnhof", lat: 50.9413, lon: 6.9583, narrative: "Auf der geschichtsträchtigen Domplatte weht oft ein frischer Windzug zwischen den gotischen steinernen Portalen." },
-            rheinau: { id: "rheinau", name: "Rheinauhafen", description: "Moderne Architektur & Kranhäuser direkt am Fluss", lat: 50.9231, lon: 6.9664, narrative: "Am Hafenbecken ist die Luft rheinisch frisch und von der Dynamik des lebendigen Rheinstroms geprägt." },
-            ehrenfeld: { id: "ehrenfeld", name: "Ehrenfeld", description: "Buntes Kreativviertel mit Street-Art-Galerien", lat: 50.9515, lon: 6.9189, narrative: "In den bunten Gassen Ehrenfelds entfalten sich Street-Art, Cafés und die pure Kölner Lebensfreude." }
+        // Standort-Konfiguration ausschließlich für Köln
+        const COLOGNE_LOCATION = {
+            id: "koeln",
+            name: "Köln",
+            description: "Stadtgebiet Köln, Nordrhein-Westfalen",
+            lat: 50.94,
+            lon: 6.96,
+            narrative: "Die Rheinmetropole Köln liegt in der Kölner Bucht und zeichnet sich durch ein mildes, maritim geprägtes Klima aus."
         };
 
         // Weather Code Metadata Mapping
         function getWeatherDetails(code) {
             if (code === 0) {
                 return {
-                    label: "Sonnig / Klar",
+                    label: "Sonnig / Klarer Himmel",
                     icon: "sun",
                     bgGradient: "from-amber-400 via-orange-400 to-amber-500",
                     textColor: "text-amber-950",
@@ -355,7 +356,7 @@
                 return {
                     label: "Nebel / Reifnebel",
                     icon: "cloud-fog",
-                    bgGradient: "from-slate-200 via-zinc-300 to-slate-450",
+                    bgGradient: "from-slate-200 via-zinc-300 to-slate-400",
                     textColor: "text-zinc-900",
                     accentBg: "bg-zinc-100",
                     accentText: "text-zinc-800",
@@ -375,7 +376,7 @@
                 return {
                     label: "Gefrierender Regen",
                     icon: "snowflake",
-                    bgGradient: "from-teal-200 via-cyan-300 to-blue-450",
+                    bgGradient: "from-teal-200 via-cyan-300 to-blue-400",
                     textColor: "text-slate-900",
                     accentBg: "bg-cyan-100",
                     accentText: "text-cyan-800",
@@ -390,7 +391,7 @@
                     textColor: "text-white",
                     accentBg: "bg-blue-900/50",
                     accentText: "text-blue-100",
-                    themeColor: "#3682f6"
+                    themeColor: "#3b82f6"
                 };
             } else if (code === 71 || code === 73 || code === 75 || code === 77) {
                 return {
@@ -406,11 +407,21 @@
                 return {
                     label: "Regenschauer",
                     icon: "cloud-rain",
-                    bgGradient: "from-blue-500 via-indigo-550 to-blue-600",
+                    bgGradient: "from-blue-500 via-indigo-500 to-blue-600",
                     textColor: "text-white",
                     accentBg: "bg-blue-950/40",
                     accentText: "text-blue-200",
                     themeColor: "#2563eb"
+                };
+            } else if (code === 85 || code === 86) {
+                return {
+                    label: "Schneeschauer",
+                    icon: "cloud-snow",
+                    bgGradient: "from-cyan-200 via-blue-300 to-indigo-400",
+                    textColor: "text-blue-950",
+                    accentBg: "bg-cyan-100/80",
+                    accentText: "text-cyan-900",
+                    themeColor: "#67e8f9"
                 };
             } else if (code === 95 || code === 96 || code === 99) {
                 return {
@@ -426,7 +437,7 @@
             return {
                 label: "Wolken",
                 icon: "cloud",
-                bgGradient: "from-slate-400 via-slate-500 to-zinc-650",
+                bgGradient: "from-slate-400 via-slate-500 to-zinc-600",
                 textColor: "text-white",
                 accentBg: "bg-slate-700/50",
                 accentText: "text-slate-100",
@@ -434,60 +445,35 @@
             };
         }
 
-        let activeLandmarkKey = "city";
-
-        function changeLandmark(key) {
-            activeLandmarkKey = key;
-            
-            // Toggle active style on buttons
-            document.querySelectorAll(".landmark-btn").forEach(btn => {
-                btn.className = "landmark-btn px-3 py-1.5 rounded-md font-medium whitespace-nowrap transition-all duration-200 text-slate-400 hover:text-slate-200";
-            });
-            const activeBtn = document.getElementById(`btn-${key}`);
-            if (activeBtn) {
-                activeBtn.className = "landmark-btn px-3 py-1.5 rounded-md font-medium whitespace-nowrap transition-all duration-300 bg-slate-800 text-white shadow-sm";
-            }
-
-            // Sync Header Names
-            document.getElementById("active-landmark-name").innerText = LANDMARKS[key].name;
-
-            // Trigger Fetch
-            fetchWeather();
-        }
-
         async function fetchWeather() {
-            const landmark = LANDMARKS[activeLandmarkKey];
-            
-            // Show Loading
             document.getElementById("loading-spinner").classList.remove("hidden");
             document.getElementById("weather-content").classList.add("hidden");
             document.getElementById("error-banner").classList.add("hidden");
 
             try {
                 const url = `https://api.open-meteo.com/v1/forecast` +
-                  `?latitude=${landmark.lat}` +
-                  `&longitude=${landmark.lon}` +
+                  `?latitude=${COLOGNE_LOCATION.lat}` +
+                  `&longitude=${COLOGNE_LOCATION.lon}` +
                   `&hourly=temperature_2m,rain,precipitation,weather_code` +
                   `&current=temperature_2m,relative_humidity_2m,precipitation,rain,weather_code,wind_speed_10m` +
                   `&timezone=Europe%2FBerlin`;
 
                 const res = await fetch(url);
-                if (!res.ok) throw new Error("Es konnte keine Verbindung zum Server aufgebaut werden.");
+                if (!res.ok) throw new Error("Es konnte keine Verbindung zum Wetterdienst aufgebaut werden.");
                 const data = await res.json();
 
                 if (!data.current || !data.hourly) throw new Error("Wetter-Datenstruktur unvollständig.");
 
-                renderApp(data, landmark);
-
+                renderApp(data);
             } catch (err) {
                 console.error(err);
                 document.getElementById("error-banner").classList.remove("hidden");
-                document.getElementById("error-message").innerText = err.message;
+                document.getElementById("error-message").innerText = err.message || "Unbekannter Fehler beim Abruf.";
                 document.getElementById("loading-spinner").classList.add("hidden");
             }
         }
 
-        function renderApp(data, landmark) {
+        function renderApp(data) {
             const current = data.current;
             const style = getWeatherDetails(current.weather_code);
 
@@ -496,36 +482,42 @@
 
             // 1. Render Hero Wetteranzeige
             const heroPanel = document.getElementById("hero-panel");
-            heroPanel.className = `hero-panel relative overflow-hidden rounded-3xl p-6 md:p-8 bg-gradient-to-br ${style.bgGradient} shadow-xl transition-all duration-700`;
+            heroPanel.className = `relative overflow-hidden rounded-3xl p-6 md:p-8 bg-gradient-to-br ${style.bgGradient} xl:shadow-2xl shadow-lg transition-all duration-700`;
             
             const badge = document.getElementById("badge");
             badge.className = `inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border border-white/10 shadow-sm ${style.accentBg} ${style.accentText}`;
             
-            document.getElementById("current-temp").innerText = Math.round(current.temperature_2m);
+            const currentTempEl = document.getElementById("current-temp");
+            currentTempEl.innerText = Math.round(current.temperature_2m);
+            currentTempEl.className = `text-6xl md:text-7xl font-display font-extrabold tracking-tighter ${style.textColor}`;
+
+            const currentTempUnitEl = document.getElementById("current-temp-unit");
+            currentTempUnitEl.className = `text-4xl md:text-5xl font-display font-semibold ${style.textColor}`;
             
             const currentStatus = document.getElementById("current-status");
             currentStatus.className = `text-xl md:text-2xl font-bold tracking-tight ${style.textColor}`;
             currentStatus.innerText = style.label;
 
-            document.getElementById("current-landmark-desc").innerText = landmark.description;
-            // Sync text colors inside hero
-            document.getElementById("current-temp").className = `text-6xl md:text-7xl font-display font-extrabold tracking-tighter ${style.textColor}`;
+            const locationDescEl = document.getElementById("current-location-desc");
+            locationDescEl.innerText = COLOGNE_LOCATION.description;
+            locationDescEl.className = `font-medium ${style.textColor}`;
+
+            const locationPinEl = document.getElementById("current-location-pin");
+            locationPinEl.className = `w-3.5 h-3.5 ${style.textColor}`;
 
             // Render Hero Weather big Icon
             const iconDiv = document.getElementById("hero-icon");
-            iconDiv.innerHTML = `<i data-lucide="${style.icon}" class="w-16 h-16 md:w-20 md:h-20 drop-shadow-md flex items-center justify-center ${style.textColor.includes('text-white') ? 'text-white' : style.textColor}"></i>`;
+            iconDiv.innerHTML = `<i data-lucide="${style.icon}" class="w-16 h-16 md:w-20 md:h-20 drop-shadow-md ${style.textColor.includes('text-white') ? 'text-white' : style.textColor}"></i>`;
 
             // Setup current parameters
             document.getElementById("current-humidity").innerText = `${current.relative_humidity_2m}%`;
             document.getElementById("current-wind").innerText = `${current.wind_speed_10m} km/h`;
             document.getElementById("current-precipitation").innerText = `${current.precipitation} mm`;
-            document.getElementById("current-rain-bool").innerText = current.rain > 0 ? "Ja (Regen)" : "Nein";
+            document.getElementById("current-rain-bool").innerText = current.rain > 0 ? "Ja (Regnet)" : "Nein";
 
             // 2. Render 24H Forecast and line coordinates
-            const hourlyList = [];
             const times = data.hourly.time;
             const temps = data.hourly.temperature_2m;
-            const rains = data.hourly.rain || [];
             const precs = data.hourly.precipitation || [];
             const codes = data.hourly.weather_code || [];
 
@@ -555,61 +547,66 @@
             const hourlyTemps = hourly24h.map(h => h.temp);
             const maxH = Math.max(...hourlyTemps);
             const minH = Math.min(...hourlyTemps);
-            const diffH = (maxH - minH) || 1;
             
             const padMin = minH - 1.5;
             const padMax = maxH + 1.5;
-            const padRange = padMax - padMin;
+            const padRange = (padMax - padMin) || 1;
 
             document.getElementById("chart-max-temp").innerText = `${maxH}°C`;
 
             const chartLine = document.getElementById("chart-line");
             const chartArea = document.getElementById("chart-area");
             const chartLabels = document.getElementById("chart-labels");
+            const hoverIndicator = document.getElementById("chart-hover-indicator");
+            const hoverLine = document.getElementById("chart-hover-line");
+            const hoverDot = document.getElementById("chart-hover-dot");
             
             chartLine.setAttribute("stroke", style.themeColor);
-            document.querySelector("#chartGradient stop").setAttribute("stop-color", style.themeColor);
+            hoverDot.setAttribute("stroke", style.themeColor);
+            document.querySelectorAll("#chartGradient stop").forEach(stop => {
+                stop.setAttribute("stop-color", style.themeColor);
+            });
 
-            let points = [];
+            const points = [];
             let labHTML = "";
 
             hourly24h.forEach((h, idx) => {
-                const x = (idx / 23) * 800;
+                const x = hourly24h.length > 1 ? (idx / (hourly24h.length - 1)) * 800 : 0;
                 const y = 140 - 15 - ((h.temp - padMin) / padRange) * (140 - 30);
                 points.push({ x, y });
 
                 if (idx % 3 === 0) {
-                    labHTML += `<text x="${x}" y="${y - 10}" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace" font-weight="600">${Math.round(h.temp)}°</text>`;
+                    labHTML += `<text x="${x}" y="${y - 10}" text-anchor="middle" fill="#cbd5e1" font-size="9" font-family="monospace" font-weight="600">${Math.round(h.temp)}°</text>`;
                 }
             });
 
             chartLabels.innerHTML = labHTML;
 
-            // Generate cubic path
-            let dPath = `M ${points[0].x} ${points[0].y}`;
-            for (let k = 0; k < points.length - 1; k++) {
-                const p0 = points[k];
-                const p1 = points[k + 1];
-                const cpX1 = p0.x + (p1.x - p0.x) / 3;
-                const cpY1 = p0.y;
-                const cpX2 = p0.x + 2 * (p1.x - p0.x) / 3;
-                const cpY2 = p1.y;
-                dPath += ` C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${p1.x} ${p1.y}`;
+            if (points.length > 0) {
+                let dPath = `M ${points[0].x} ${points[0].y}`;
+                for (let k = 0; k < points.length - 1; k++) {
+                    const p0 = points[k];
+                    const p1 = points[k + 1];
+                    const cpX1 = p0.x + (p1.x - p0.x) / 3;
+                    const cpY1 = p0.y;
+                    const cpX2 = p0.x + 2 * (p1.x - p0.x) / 3;
+                    const cpY2 = p1.y;
+                    dPath += ` C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${p1.x} ${p1.y}`;
+                }
+                chartLine.setAttribute("d", dPath);
+                chartArea.setAttribute("d", `${dPath} L 800 150 L 0 150 Z`);
             }
-
-            chartLine.setAttribute("d", dPath);
-            chartArea.setAttribute("d", `${dPath} L 800 150 L 0 150 Z`);
 
             // Generate hourly timeline cards
             const container = document.getElementById("hourly-cards-container");
             container.innerHTML = "";
             
-            hourly24h.forEach(hour => {
+            hourly24h.forEach((hour, idx) => {
                 const hTime = new Date(hour.time).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
                 const hStyle = getWeatherDetails(hour.code);
                 
                 const card = document.createElement("div");
-                card.className = "flex-none w-[74px] p-2.5 rounded-2xl flex flex-col items-center gap-1.5 bg-slate-950/60 hover:bg-slate-800/60 border border-slate-800/40 text-slate-300 transition-all duration-300 cursor-default";
+                card.className = "flex-none w-[74px] p-2.5 rounded-2xl flex flex-col items-center gap-1.5 bg-slate-950/60 hover:bg-slate-800 border border-slate-800/50 text-slate-300 transition-all duration-300 cursor-default";
                 card.innerHTML = `
                     <span class="text-[11px] font-medium text-slate-400 font-mono">${hTime}</span>
                     <div class="p-1.5 rounded-full bg-slate-900/30">
@@ -620,6 +617,21 @@
                         ${hour.precipitation > 0 ? `<span class="text-[9px] font-mono text-blue-400 block mt-0.5">${hour.precipitation.toFixed(1)}mm</span>` : ''}
                     </div>
                 `;
+                card.addEventListener("mouseenter", () => {
+                    const pt = points[idx];
+                    if (pt) {
+                        hoverLine.setAttribute("x1", pt.x);
+                        hoverLine.setAttribute("x2", pt.x);
+                        hoverDot.setAttribute("cx", pt.x);
+                        hoverDot.setAttribute("cy", pt.y);
+                        hoverIndicator.classList.remove("hidden");
+                    }
+                    card.style.borderColor = style.themeColor;
+                });
+                card.addEventListener("mouseleave", () => {
+                    hoverIndicator.classList.add("hidden");
+                    card.style.borderColor = "";
+                });
                 container.appendChild(card);
             });
 
@@ -631,20 +643,21 @@
                 dailyGroups[dayKey].push({
                     temp: temps[i],
                     code: codes[i] || 0,
-                    precipitation: precs[i] || 0
+                    precipitation: precs[i] || 0,
+                    time: times[i]
                 });
             }
 
-            const todayStr = new Date().toISOString().split("T")[0];
+            const todayStr = new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Berlin" });
             const dailyDays = Object.keys(dailyGroups).map(dateStr => {
                 const items = dailyGroups[dateStr];
                 const dayTemps = items.map(t => t.temp);
                 const sumPrecip = items.reduce((acc, currentVal) => acc + currentVal.precipitation, 0);
                 
-                // Get noon code (index 12 or closest)
-                const noonCode = items[Math.floor(items.length / 2)]?.code || 0;
+                const middayItem = items.find(h => new Date(h.time).getHours() === 12) || items[Math.floor(items.length / 2)];
+                const noonCode = middayItem ? middayItem.code : 0;
 
-                const dateObj = new Date(dateStr);
+                const dateObj = new Date(dateStr + "T12:00:00");
                 let weekday = dateObj.toLocaleDateString("de-DE", { weekday: "long" });
                 if (dateStr === todayStr) weekday = "Heute";
                 const formattedDate = dateObj.toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit" });
@@ -660,7 +673,6 @@
                 };
             }).slice(0, 5);
 
-            // Weekly extremes for visual relative bar lengths
             const globalMax = Math.max(...dailyDays.map(d => d.max));
             const globalMin = Math.min(...dailyDays.map(d => d.min));
             const globalRange = (globalMax - globalMin) || 1;
@@ -670,13 +682,11 @@
 
             dailyDays.forEach(day => {
                 const dStyle = getWeatherDetails(day.code);
-                
-                // relative offsets
                 const leftOffset = ((day.min - globalMin) / globalRange) * 100;
                 const widthPercent = ((day.max - day.min) / globalRange) * 100;
 
                 const row = document.createElement("div");
-                row.className = "flex items-center justify-between gap-3 p-2.5 rounded-2xl bg-slate-950/40 border border-slate-950 hover:bg-slate-950 hover:border-slate-800/80 transition-all duration-300";
+                row.className = "flex items-center justify-between gap-3 p-2.5 rounded-2xl bg-slate-950/40 border border-slate-900 hover:bg-slate-950 hover:border-slate-800/80 transition-all duration-300";
                 row.innerHTML = `
                     <div class="w-[85px] leading-tight">
                         <span class="text-xs font-semibold text-white block">${day.weekday}</span>
@@ -695,8 +705,8 @@
                     </div>
                     <div class="flex items-center gap-2.5 font-mono text-xs">
                         <span class="text-slate-400 w-6 text-right">${Math.round(day.min)}°</span>
-                        <div class="w-20 h-1.5 bg-slate-800 rounded-full relative overflow-hidden hidden xs:block">
-                            <span class="absolute h-full top-0 rounded-full bg-gradient-to-r from-teal-400 via-amber-400 to-orange-400" style="left: ${leftOffset}%; width: ${Math.max(8, widthPercent)}%"></span>
+                        <div class="w-14 sm:w-20 h-1.5 bg-slate-800/80 rounded-full relative overflow-hidden">
+                            <span class="absolute h-full top-0 rounded-full bg-gradient-to-r from-teal-400 via-amber-400 to-orange-400" style="left: ${Math.max(0, leftOffset)}%; width: ${Math.max(8, widthPercent)}%"></span>
                         </div>
                         <span class="text-white w-6 text-right font-semibold">${Math.round(day.max)}°</span>
                     </div>
@@ -705,8 +715,8 @@
             });
 
             // 4. Update footnote details
-            document.getElementById("fact-title").innerText = `Rheinische Anekdote: ${landmark.name}`;
-            document.getElementById("fact-text").innerText = landmark.narrative;
+            document.getElementById("fact-title").innerText = `Wetterprofil ${COLOGNE_LOCATION.name}`;
+            document.getElementById("fact-text").innerText = `${COLOGNE_LOCATION.narrative} Die Daten werden in Echtzeit berechnet und zeigen die aktuelle atmosphärische Prognose für Köln (${COLOGNE_LOCATION.lat}° N, ${COLOGNE_LOCATION.lon}° O) an.`;
             
             const localTimeStr = new Date().toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
             document.getElementById("meta-updated-time").innerText = localTimeStr;
