@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js – Lichtblauer Kreis</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #333333; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; background-color:white; padding:1rem;">THREE JS</h1>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
+    <script>
+        // Szene, Kamera und Renderer
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x333333); // dunkelgrauer Hintergrund
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Lichtblauer Kreis (Sphere)
+        const geometry = new THREE.SphereGeometry(1, 32, 32);
+        const material = new THREE.MeshBasicMaterial({ color: 0xadd8e6, wireframe: false }); // light blue
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+
+        // Kamera initial position
+        camera.position.z = 5;
+
+        // Animation – Kreis bewegt sich von links nach rechts
+        const speed = 0.005; // langsame Geschwindigkeit
+        function animate() {
+            requestAnimationFrame(animate);
+            sphere.position.x += speed;
+            // Wenn der Kreis den rechten Rand verlässt, zurücksetzen
+            if (sphere.position.x > 5) sphere.position.x = -5;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Anpassung bei Fenstergröße
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
